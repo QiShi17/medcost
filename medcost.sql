@@ -49,7 +49,7 @@ DROP TABLE IF EXISTS `expense_account`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `expense_account` (
   `id` bigint(20) NOT NULL,
-  `serial_num` bigint(20) DEFAULT NULL COMMENT '流水号（时间戳17+随机码3）',
+  `serial_num` char(20) COLLATE utf8_bin DEFAULT NULL COMMENT '流水号（时间戳17+随机码3）',
   `f_hospital_id` bigint(20) DEFAULT NULL COMMENT '转诊前医院',
   `referral_img` varchar(500) COLLATE utf8_bin DEFAULT NULL COMMENT '转诊单照片',
   `l_hospital_name` varchar(45) COLLATE utf8_bin DEFAULT NULL COMMENT '转诊后医院名',
@@ -272,4 +272,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-11-08 15:29:55
+-- Dump completed on 2020-11-08 18:28:57
