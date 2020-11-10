@@ -78,8 +78,6 @@ public class ExpenseAccount implements Serializable {
     @ApiModelProperty(value = "状态")
     private Integer status;
 
-    private String expenseAccountcol;
-
     @ApiModelProperty(value = "创建时间")
     @TableField(fill = FieldFill.INSERT)
     private Date createTime;

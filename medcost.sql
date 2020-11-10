@@ -27,6 +27,7 @@ CREATE TABLE `department` (
   `name` varchar(20) COLLATE utf16_bin DEFAULT NULL,
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime DEFAULT NULL COMMENT '修改时间',
+  `is_delete` tinyint(4) DEFAULT NULL COMMENT '逻辑删除',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_bin COMMENT='部门表';
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -66,7 +67,6 @@ CREATE TABLE `expense_account` (
   `invoice_time` datetime DEFAULT NULL COMMENT '发票时间',
   `invoice_fee` double DEFAULT NULL COMMENT '发票费用',
   `status` int(4) DEFAULT NULL COMMENT '状态',
-  `expense_accountcol` varchar(45) COLLATE utf8_bin DEFAULT NULL,
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`)
@@ -204,7 +204,7 @@ CREATE TABLE `user` (
   `password` varchar(64) DEFAULT NULL COMMENT '密码',
   `gender` tinyint(4) DEFAULT NULL COMMENT '性别',
   `age` int(5) DEFAULT NULL COMMENT '年龄',
-  `type` int(4) DEFAULT NULL COMMENT '用户类型（员工/学生）',
+  `type` int(4) DEFAULT NULL COMMENT '用户类型（学生0/员工1）',
   `login_time` datetime DEFAULT NULL COMMENT '最后登录时间',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `school` varchar(45) DEFAULT NULL COMMENT '学院',
@@ -272,4 +272,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-11-08 18:28:57
+-- Dump completed on 2020-11-10 14:36:59
