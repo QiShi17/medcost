@@ -1,13 +1,13 @@
--- MySQL dump 10.13  Distrib 8.0.18, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.27, for Win64 (x86_64)
 --
 -- Host: localhost    Database: medcost
 -- ------------------------------------------------------
--- Server version	8.0.18
+-- Server version	5.7.27
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -21,7 +21,7 @@
 
 DROP TABLE IF EXISTS `department`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `department` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(20) COLLATE utf16_bin DEFAULT NULL,
@@ -29,7 +29,7 @@ CREATE TABLE `department` (
   `update_time` datetime DEFAULT NULL COMMENT '修改时间',
   `is_delete` tinyint(4) DEFAULT NULL COMMENT '逻辑删除',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_bin COMMENT='部门表';
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf16 COLLATE=utf16_bin COMMENT='部门表';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,6 +38,7 @@ CREATE TABLE `department` (
 
 LOCK TABLES `department` WRITE;
 /*!40000 ALTER TABLE `department` DISABLE KEYS */;
+INSERT INTO `department` VALUES (1,'计算机学院',NULL,NULL,1),(2,'信息学院',NULL,NULL,1),(3,'金融学院',NULL,NULL,1),(4,'管理学院',NULL,NULL,1),(5,'外语学院',NULL,NULL,1),(6,'财经学院',NULL,NULL,1),(7,'人事处',NULL,NULL,1),(8,'教务处',NULL,NULL,1),(9,'财务部',NULL,NULL,1),(10,'科技处',NULL,NULL,1),(11,'后勤处',NULL,NULL,1),(12,'保卫处',NULL,NULL,1);
 /*!40000 ALTER TABLE `department` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -47,7 +48,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `expense_account`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `expense_account` (
   `id` bigint(20) NOT NULL,
   `serial_num` char(20) COLLATE utf8_bin DEFAULT NULL COMMENT '流水号（时间戳17+随机码3）',
@@ -88,7 +89,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `expense_type`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `expense_type` (
   `id` bigint(20) NOT NULL,
   `name` varchar(45) COLLATE utf8_bin DEFAULT NULL,
@@ -115,7 +116,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `hospital`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `hospital` (
   `id` bigint(20) NOT NULL,
   `name` varchar(45) COLLATE utf8_bin DEFAULT NULL COMMENT '医院名',
@@ -138,7 +139,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `reviewer_expense_account_relation`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `reviewer_expense_account_relation` (
   `id` bigint(20) NOT NULL,
   `reviewer_id_num` bigint(20) DEFAULT NULL COMMENT '审核人学工号',
@@ -169,7 +170,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `role`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `role` (
   `id` bigint(20) NOT NULL,
   `value` varchar(45) COLLATE utf8_bin DEFAULT NULL,
@@ -196,7 +197,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `username` char(30) NOT NULL COMMENT '学工号',
@@ -234,7 +235,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `user_role_relation`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user_role_relation` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `user_id` bigint(20) DEFAULT NULL,
@@ -254,14 +255,6 @@ LOCK TABLES `user_role_relation` WRITE;
 INSERT INTO `user_role_relation` VALUES (2,37,1,NULL,NULL),(3,37,2,NULL,NULL),(6,1,1,NULL,NULL);
 /*!40000 ALTER TABLE `user_role_relation` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Dumping events for database 'medcost'
---
-
---
--- Dumping routines for database 'medcost'
---
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -272,4 +265,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-11-10 14:36:59
+-- Dump completed on 2020-11-12 16:53:20
