@@ -90,8 +90,37 @@ public class UserController {
             List<String> roles = roleList.stream().map(Role::getValue).collect(Collectors.toList());
             data.put("roles",roles);
         }
+        data.put("id",user.getId());
+        data.put("gender",user.getGender());
+        data.put("age",user.getAge());
+        data.put("type",user.getType());
+        data.put("school",user.getSchool());
+        data.put("major",user.getMajor());
+        data.put("grade",user.getGrade());
+        data.put("department",user.getDepartment());
+        data.put("annualExpense",user.getAnnualExpense());
         return CommonResult.success(data);
     }
+
+//    @ApiOperation(value = "根据用户id获取用户信息")
+//    @RequestMapping(value = "/info", method = RequestMethod.GET)
+//    @ResponseBody
+//    public CommonResult getAdminInfo(Principal principal) {
+//        if(principal==null){
+//            return CommonResult.unauthorized(null);
+//        }
+//        String username = principal.getName();
+//        User user = userService.getUserByUsername(username);
+//        Map<String, Object> data = new HashMap<>();
+//        data.put("username", user.getUsername());
+//        data.put("realname",user.getRealname());
+//        List<Role> roleList = roleService.getRoleListByUserId(user.getId());
+//        if(CollUtil.isNotEmpty(roleList)){
+//            List<String> roles = roleList.stream().map(Role::getValue).collect(Collectors.toList());
+//            data.put("roles",roles);
+//        }
+//        return CommonResult.success(data);
+//    }
 
     @ApiOperation(value = "登出功能")
     @RequestMapping(value = "/logout", method = RequestMethod.POST)

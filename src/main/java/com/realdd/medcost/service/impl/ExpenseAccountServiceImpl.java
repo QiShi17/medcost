@@ -25,6 +25,7 @@ public class ExpenseAccountServiceImpl extends ServiceImpl<ExpenseAccountMapper,
 
     @Override
     public boolean create(ExpenseAccount expenseAccount) {
+
         expenseAccount.setSerialNum(serialNumberUtil.getSerialNumber());
         return save(expenseAccount);
     }

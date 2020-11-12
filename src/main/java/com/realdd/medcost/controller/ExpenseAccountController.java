@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @Api(tags = "ExpenseAccountController", description = "报销单管理")
 @RestController
-@RequestMapping("/expense_Account")
+@RequestMapping("/expense_account")
 public class ExpenseAccountController {
 
     @Autowired
@@ -27,7 +27,7 @@ public class ExpenseAccountController {
 
     @ApiOperation("添加报销单")
     @PostMapping(value = "/create")
-    public CommonResult create(ExpenseAccount expenseAccount){
+    public CommonResult create(@RequestBody ExpenseAccount expenseAccount){
         boolean success=expenseAccountService.create(expenseAccount);
         if(success){
             return CommonResult.success(null);
