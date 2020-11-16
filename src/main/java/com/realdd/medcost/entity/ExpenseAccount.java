@@ -62,6 +62,7 @@ public class ExpenseAccount implements Serializable {
     @ApiModelProperty(value = "挂号费用")
     private Double registFee;
 
+    @ApiModelProperty(value = "病症")
     private String disease;
 
     private String prescriptionImg;
