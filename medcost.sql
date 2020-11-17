@@ -11,7 +11,7 @@
  Target Server Version : 80017
  File Encoding         : 65001
 
- Date: 17/11/2020 23:15:01
+ Date: 17/11/2020 23:35:14
 */
 
 SET NAMES utf8mb4;
@@ -26,7 +26,7 @@ CREATE TABLE `department`  (
   `name` varchar(20) CHARACTER SET utf16 COLLATE utf16_bin NULL DEFAULT NULL,
   `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
-  `is_delete` tinyint(4) NULL DEFAULT NULL COMMENT '逻辑删除',
+  `is_delete` tinyint(4) NOT NULL DEFAULT 1 COMMENT '逻辑删除',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf16 COLLATE = utf16_bin COMMENT = '部门表' ROW_FORMAT = Dynamic;
 
@@ -185,7 +185,7 @@ CREATE TABLE `user`  (
   `major` varchar(45) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '专业',
   `grade` int(5) NULL DEFAULT NULL COMMENT '年级',
   `department` varchar(45) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '部门',
-  `annual_expense` varchar(45) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '年度报销金额',
+  `annual_expense` double(45, 0) NULL DEFAULT NULL COMMENT '年度报销金额',
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `id_num_UNIQUE`(`username`) USING BTREE
@@ -194,11 +194,11 @@ CREATE TABLE `user`  (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES (1, '2020212029', '史祺', '$2a$10$5xiEj2d1qbuw9jfGAmjslOHQl8IevyYTFuciNzlyQHHZ6.PSQTnCW', 1, 22, 1, '2018-09-29 13:55:30', '2018-09-29 13:55:30', '计算机学院', '计算机科学与技术', 2020, '', '0', '2020-10-31 19:36:49');
-INSERT INTO `user` VALUES (35, '3de3', 'string', '$2a$10$4iZO9tLHFm3KRC87tm7tyOhJ3d5yZ9pyxTelxA4IC/rLjGhR1caBy', 0, 0, 0, '2020-10-24 12:54:30', '2020-10-24 13:04:53', 'string', 'string', 0, 'string', 'string', NULL);
-INSERT INTO `user` VALUES (37, 'master', '审核负责人', '$2a$10$OHi1BAkeUK07sWKVmpZKv.qw2SYdIfqAqFvZOJBhX4aerdYoHf.Ka', 0, 24, 0, '2020-10-24 21:46:42', '2020-10-24 21:49:22', 'string', 'string', 0, '审核部门', 'string', NULL);
-INSERT INTO `user` VALUES (38, 'reviewer', '测试审核员', '123456', 0, 23, 1, '2020-11-05 20:37:10', '2020-10-24 22:37:15', '', '计算机科学与技术', 2020, '审核部门', '0', '2020-11-14 20:39:03');
-INSERT INTO `user` VALUES (39, 'weiser', '徐维泽', '123456', 0, 22, 1, '2020-11-05 20:36:20', '2020-10-30 11:29:34', '计算机学院', '计算机科学与技术', 2016, '', '0', '2020-10-30 11:30:11');
+INSERT INTO `user` VALUES (1, '2020212029', '史祺', '$2a$10$5xiEj2d1qbuw9jfGAmjslOHQl8IevyYTFuciNzlyQHHZ6.PSQTnCW', 1, 22, 1, '2018-09-29 13:55:30', '2018-09-29 13:55:30', '计算机学院', '计算机科学与技术', 2020, '', 0, '2020-10-31 19:36:49');
+INSERT INTO `user` VALUES (35, '3de3', 'string', '$2a$10$4iZO9tLHFm3KRC87tm7tyOhJ3d5yZ9pyxTelxA4IC/rLjGhR1caBy', 0, 0, 0, '2020-10-24 12:54:30', '2020-10-24 13:04:53', 'string', 'string', 0, 'string', 0, NULL);
+INSERT INTO `user` VALUES (37, 'master', '审核负责人', '$2a$10$OHi1BAkeUK07sWKVmpZKv.qw2SYdIfqAqFvZOJBhX4aerdYoHf.Ka', 0, 24, 0, '2020-10-24 21:46:42', '2020-10-24 21:49:22', 'string', 'string', 0, '审核部门', 0, NULL);
+INSERT INTO `user` VALUES (38, 'reviewer', '测试审核员', '123456', 0, 23, 1, '2020-11-05 20:37:10', '2020-10-24 22:37:15', '', '计算机科学与技术', 2020, '审核部门', 0, '2020-11-14 20:39:03');
+INSERT INTO `user` VALUES (39, 'weiser', '徐维泽', '123456', 0, 22, 1, '2020-11-05 20:36:20', '2020-10-30 11:29:34', '计算机学院', '计算机科学与技术', 2016, '', 0, '2020-10-30 11:30:11');
 
 -- ----------------------------
 -- Table structure for user_role_relation
