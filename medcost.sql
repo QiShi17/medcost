@@ -11,7 +11,7 @@
  Target Server Version : 80017
  File Encoding         : 65001
 
- Date: 15/11/2020 20:57:41
+ Date: 17/11/2020 21:51:54
 */
 
 SET NAMES utf8mb4;
@@ -28,7 +28,7 @@ CREATE TABLE `department`  (
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   `is_delete` tinyint(4) NULL DEFAULT NULL COMMENT '逻辑删除',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf16 COLLATE = utf16_bin COMMENT = '部门表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf16 COLLATE = utf16_bin COMMENT = '部门表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of department
@@ -77,8 +77,8 @@ CREATE TABLE `expense_account`  (
 -- ----------------------------
 -- Records of expense_account
 -- ----------------------------
-INSERT INTO `expense_account` VALUES (1, '111111', 1, 'c://', '3', '口腔科', '2020-12-16 20:41:29', 1, NULL, 'c://', '2020-11-04 20:42:53', 50, '拔智齿', 'c://', 'c://', '2020-11-13 20:43:30', 1200, 1, NULL, NULL);
-INSERT INTO `expense_account` VALUES (2, '222222', 1, 'c://', '3', '口腔科', '2020-12-16 20:41:29', NULL, NULL, 'c://', '2020-11-04 20:42:53', 50, '拔智齿', 'c://', 'c://', '2020-11-13 20:43:30', 1200, 1, NULL, NULL);
+INSERT INTO `expense_account` VALUES (1, '111111', 1, 'c://', '北医三院', '口腔科', '2020-12-16 20:41:29', 1, 'weiser', 'c://', '2020-11-04 20:42:53', 50, '拔智齿', 'c://', 'c://', '2020-11-13 20:43:30', 1200, 1, NULL, NULL);
+INSERT INTO `expense_account` VALUES (2, '222222', 1, 'c://', '北医三院', '口腔科', '2020-12-16 20:41:29', NULL, 'weiser', 'c://', '2020-11-04 20:42:53', 50, '拔智齿', 'c://', 'c://', '2020-11-13 20:43:30', 1200, 1, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for expense_type
@@ -142,9 +142,9 @@ CREATE TABLE `reviewer_expense_account_relation`  (
 -- ----------------------------
 -- Records of reviewer_expense_account_relation
 -- ----------------------------
-INSERT INTO `reviewer_expense_account_relation` VALUES (1, 38, 111111, 37, '没有转诊单', 0, 0, 1500, '2020-11-06 20:56:21', '2020-11-11 20:56:25');
-INSERT INTO `reviewer_expense_account_relation` VALUES (2, 38, 111111, 37, '没有挂号单', 0, 0, 1500, NULL, NULL);
-INSERT INTO `reviewer_expense_account_relation` VALUES (3, 38, 222222, 39, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `reviewer_expense_account_relation` VALUES (1, 38, 1, 37, '没有转诊单', 0, 0, 1500, '2020-11-06 20:56:21', '2020-11-11 20:56:25');
+INSERT INTO `reviewer_expense_account_relation` VALUES (2, 38, 1, 37, '没有挂号单', 0, 0, 1500, NULL, NULL);
+INSERT INTO `reviewer_expense_account_relation` VALUES (3, 38, 2, 39, '没有转诊单', NULL, NULL, NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for role
@@ -189,7 +189,7 @@ CREATE TABLE `user`  (
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `id_num_UNIQUE`(`username`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 39 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 40 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user
@@ -211,7 +211,7 @@ CREATE TABLE `user_role_relation`  (
   `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '用户和角色关系表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '用户和角色关系表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user_role_relation
