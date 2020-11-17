@@ -70,7 +70,7 @@ public class User implements Serializable {
     private String department;
 
     @ApiModelProperty(value = "年度报销金额")
-    private Double annualExpense;
+    private String annualExpense;
 
     @ApiModelProperty(value = "修改时间")
     @TableField(fill = FieldFill.UPDATE)
