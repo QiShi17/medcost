@@ -1,5 +1,8 @@
 package com.realdd.medcost.service.impl;
 
+import cn.afterturn.easypoi.excel.ExcelImportUtil;
+import cn.afterturn.easypoi.excel.entity.ImportParams;
+import cn.afterturn.easypoi.excel.entity.result.ExcelImportResult;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
@@ -7,6 +10,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.realdd.medcost.common.exception.ApiException;
 import com.realdd.medcost.common.utils.JwtTokenUtil;
 import com.realdd.medcost.entity.User;
 import com.realdd.medcost.entity.UserRoleRelation;
@@ -26,6 +30,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -151,6 +156,43 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         LOGGER.info("inserUserId执行");
         saveOrUpdate(user);
         return user;
+    }
+
+    @Override
+    public boolean insertBatchUserDuplicateEncodePwd(List<User> userList) {
+        for(User user:userList){
+            if(!StrUtil.isEmpty(user.getPassword())){
+                user.setPassword(passwordEncoder.encode(user.getPassword()));
+            }
+        }
+        return userMapper.insertBatchDuplicate(userList);
+    }
+
+    //需要返回值怎么办??try catch
+    @Override
+    public boolean insertUserByExcel(MultipartFile file) {
+        ImportParams importParams = new ImportParams();
+        // 数据处理
+        importParams.setHeadRows(1);
+        importParams.setTitleRows(1);
+
+        // 需要验证
+        importParams.setNeedVerfiy(true);
+        boolean success=false;
+        try {
+            ExcelImportResult<User> result = ExcelImportUtil.importExcelMore(file.getInputStream(), User.class,
+                    importParams);
+
+            List<User> successList = result.getList();
+            for (User demoExcel : successList) {
+                System.out.println(demoExcel);
+            }
+            success=insertBatchUserDuplicateEncodePwd(successList);
+        }  catch (Exception e) {
+            throw new ApiException(e.getMessage());
+        }finally {
+            return success;
+        }
     }
 
     @Override

@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.realdd.medcost.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -52,4 +53,9 @@ public interface UserService extends IService<User> {
 
 
     public User insertUserIdTypeAuto(User user);
+
+    boolean insertBatchUserDuplicateEncodePwd(List<User> userList);
+
+    boolean insertUserByExcel(MultipartFile file);
+
 }

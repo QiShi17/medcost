@@ -21,4 +21,19 @@
         <result column="update_time" property="updateTime" />
     </resultMap>
 
+
+    <insert id="insertUserDuplicate"  useGeneratedKeys="true" keyProperty="id" keyColumn="id"
+            parameterType="com.realdd.medcost.entity.User">
+ insert into user(username,age) values(#{username},#{age}) ON DUPLICATE KEY UPDATE age=#{age}
+</insert>
+
+    <insert id="insertBatchDuplicate"  useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+insert
+into user (username, realname, password, gender, age, type, school, major, grade, department)
+values
+<foreach collection="list" item="item" index="index" separator=",">
+ (#{item.username},#{item.realname},#{item.password},#{item.gender},#{item.age},#{item.type},#{item.school},#{item.major},#{item.grade},#{item.department})</foreach>ON DUPLICATE KEY UPDATE realname=values(realname),password=values(password),gender=values(gender),age=values(age),type=values(type),school=values(school),major=values(major),grade=values(grade),department=values(department)
+</insert>
+
+
 </mapper>

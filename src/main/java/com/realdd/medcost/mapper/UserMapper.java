@@ -17,4 +17,7 @@ import java.util.List;
 
 public interface UserMapper extends BaseMapper<User> {
 
+    public boolean insertUserDuplicate(User user);
+
+    public boolean insertBatchDuplicate(List<User> userList);
 }

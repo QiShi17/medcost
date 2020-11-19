@@ -1,10 +1,15 @@
 package com.realdd.medcost.controller;
 
 
+import cn.afterturn.easypoi.excel.ExcelImportUtil;
+import cn.afterturn.easypoi.excel.entity.ImportParams;
+import cn.afterturn.easypoi.excel.entity.result.ExcelImportResult;
 import cn.hutool.core.collection.CollUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.realdd.medcost.common.api.CommonPage;
 import com.realdd.medcost.common.api.CommonResult;
+import com.realdd.medcost.common.exception.ApiException;
+import com.realdd.medcost.common.utils.FileUtil;
 import com.realdd.medcost.dto.UserLoginParam;
 import com.realdd.medcost.entity.Role;
 import com.realdd.medcost.entity.User;
@@ -17,12 +22,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
-import javax.xml.transform.Result;
+import javax.servlet.http.HttpServletResponse;
 import java.security.Principal;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -46,10 +50,6 @@ public class UserController {
     @Value("${jwt.tokenHead}")
     private String tokenHead;
 
-    //    @GetMapping("/test")
-//    public CommonResult test(){
-//        return CommonResult.success(new User(),tokenHeader);
-//    }
     @ApiOperation(value = "用户注册")
     @PostMapping("/register")
     public CommonResult<User> register(@RequestBody User userParam, BindingResult result) {
@@ -169,5 +169,31 @@ public class UserController {
         return CommonResult.failed();
     }
 
+    @ApiOperation(value = "导出清单", notes = "export", produces = "application/octet-stream")
+    @GetMapping("/test")
+    public void export(HttpServletResponse response){
 
-}
+        List<User> userList=userService.list();
+
+
+        //导出操作
+        FileUtil.exportExcel(userList,"用户表","用户",User.class,"用户.xls",response);
+    }
+//
+//    @GetMapping("importExcel")
+//    public void importExcel() {
+//        String filePath = "D:\\海贼王.xls";
+//        //解析excel，
+//        List<Person> personList = FileUtil.importExcel(filePath, 1, 1, Person.class);
+//        //也可以使用MultipartFile,使用 FileUtil.importExcel(MultipartFile file, Integer titleRows, Integer headerRows, Class<T> pojoClass)导入
+//        System.out.println("导入数据一共【" + personList.size() + "】行");
+//    }
+
+    @ApiOperation(value = "导入清单", notes = "import", produces = "application/octet-stream")
+    @PostMapping("/importExcel2")
+    public CommonResult<Object> importExcel2(@RequestParam("file") MultipartFile file) {
+        Boolean success=userService.insertUserByExcel(file);
+        if(success) return CommonResult.success(null);
+        else return  CommonResult.failed("导入文件失败");
+    }
+    }

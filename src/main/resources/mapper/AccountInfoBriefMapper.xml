@@ -18,6 +18,7 @@
         select ea.id,ea.serial_num,ea.username,ea.disease,ea.expense_type_id,ea.invoice_fee,ea.regist_fee,ea.create_time,ea.status,u.realname
         from expense_account ea,user u
         where ea.username=u.username
+
     </select>
 
 </mapper>
