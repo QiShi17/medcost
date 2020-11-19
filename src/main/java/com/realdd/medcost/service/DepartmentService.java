@@ -28,6 +28,6 @@ public interface DepartmentService extends IService<Department> {
     /**
      * 删除部门
      */
-    boolean deleteDepartment(String name);
+    boolean deleteDepartment(Long id);
 
 }

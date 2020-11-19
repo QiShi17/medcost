@@ -1,11 +1,19 @@
 package com.realdd.medcost.service.impl;
 
+import cn.hutool.core.util.StrUtil;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.realdd.medcost.entity.Department;
+import com.realdd.medcost.entity.User;
 import com.realdd.medcost.mapper.DepartmentMapper;
 import com.realdd.medcost.service.DepartmentService;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 
 /**
@@ -33,11 +41,35 @@ public class DepartmentServiceImpl extends ServiceImpl<DepartmentMapper, Departm
 
     @Override
     public boolean createDepartment(Department department) {
-        return false;
+        List<Department> list = getDepartListByName(department.getName());
+        if(list.size()==0){//部门不存在
+            return saveOrUpdate(department);
+        } else{
+            for (int i = 0; i < list.size(); i++) {
+                if (list.get(i).getIsDelete() == 1 && list.size() > 0) {//list的size>0且状态为1，说明部门存在
+                    return false;
+                } else if (list.get(i).getIsDelete() == 0) {//部门存在状态为0，修改状态
+                    list.get(i).setIsDelete(1);
+                    return saveOrUpdate(list.get(i));
+                }
+            }
+        }
+        return saveOrUpdate(department);
+    }
+
+    //在部门表中根据部门名(name)选择等于name的列表信息
+    private List<Department> getDepartListByName(String name) {
+        QueryWrapper<Department> wrapper = new QueryWrapper<>();
+        wrapper.lambda().eq(Department::getName, name);
+        return list(wrapper);
     }
 
     @Override
-    public boolean deleteDepartment(String name) {
-        return false;
+    public boolean deleteDepartment(Long id) {
+
+        Department depart = getById(id);
+        depart.setIsDelete(0);
+        return saveOrUpdate(depart);
     }
+
 }
