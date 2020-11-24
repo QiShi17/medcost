@@ -4,14 +4,18 @@ package com.realdd.medcost.controller;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.realdd.medcost.common.api.CommonPage;
 import com.realdd.medcost.common.api.CommonResult;
+import com.realdd.medcost.dto.AccountDetail;
 import com.realdd.medcost.dto.AccountInfoBrief;
 import com.realdd.medcost.entity.ExpenseAccount;
+import com.realdd.medcost.entity.Role;
 import com.realdd.medcost.service.AccountInfoBriefSevice;
 import com.realdd.medcost.service.ExpenseAccountService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * <p>
@@ -55,4 +59,11 @@ public class ExpenseAccountController {
         return CommonResult.success(CommonPage.restPage(accountInfoBriefPage));
     }
 
+    @ApiOperation("获取详情页")
+    @GetMapping(value = "/detail")
+    public CommonResult<List<AccountDetail>> fetchAccountDetail(){
+        List<AccountDetail> accountDetailsList = expenseAccountService.getAccountDetailByExpenseAccountId((long)1);
+        System.out.println(accountDetailsList);
+        return CommonResult.success(accountDetailsList);
+    }
 }
