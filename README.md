@@ -67,8 +67,8 @@ server:
 aliyun:
   oss:
     endpoint: oss-cn-beijing.aliyuncs.com # oss对外服务的访问域名
-    accessKeyId:  # 访问身份验证中用到用户标识，敏感信息不公开
-    accessKeySecret:  # 用户用于加密签名字符串和oss用来验证签名字符串的密钥，敏感信息不公开
+    accessKeyId:  # 访问身份验证中用到用户标识，敏感信息不公开(微信群里有)
+    accessKeySecret:  # 用户用于加密签名字符串和oss用来验证签名字符串的密钥，敏感信息不公开（微信群里有）
     bucketName: medcost-oss # oss的存储空间
     policy:
       expire: 300 # 签名有效期(S)
