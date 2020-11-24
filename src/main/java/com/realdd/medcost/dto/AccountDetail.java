@@ -1,10 +1,12 @@
 package com.realdd.medcost.dto;
-
-
-import com.realdd.medcost.entity.ReviewerExpenseAccountRelation;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -15,8 +17,15 @@ import java.util.List;
  *
  */
 
+@Data
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain=true)
+@ApiModel(value="AccountDetail对象",description = "报销单详情信息")
+public class AccountDetail implements Serializable {
 
-public class AccountDetail {
+    private static final long serialVersionUID = 1L;
+
+    private Long id;
 
     @ApiModelProperty(value = "状态")
     private Integer status;
@@ -48,8 +57,8 @@ public class AccountDetail {
     @ApiModelProperty(value = "专业")
     private String major;
 
-    @ApiModelProperty(value = "转诊前医院")
-    private Long fHospitalId;
+    @ApiModelProperty(value = "转诊前医院名")
+    private String fHospitalName;
 
     @ApiModelProperty(value = "转诊单照片")
     private String referralImg;
@@ -82,6 +91,6 @@ public class AccountDetail {
     @ApiModelProperty(value = "发票费用")
     private Double invoiceFee;
 
-    private List<ReviewerExpenseAccountRelation> reviewerExpenseAccountRelationList;
+    private List<ReviewRecord> reviewRecordList;
 
 }
