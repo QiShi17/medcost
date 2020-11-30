@@ -1,7 +1,10 @@
 package com.realdd.medcost.service;
 
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.realdd.medcost.entity.Department;
+import com.realdd.medcost.entity.User;
+import io.swagger.models.auth.In;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -43,6 +46,20 @@ public class DepartmentServiceTest {
         } else {
             System.out.println("删除失败");
         }
+    }
+
+    @Test
+    void listDepartment(){
+
+        Page<Department> list=departmentService.list(null,10,1);
+        if(list!=null){
+            System.out.println(list.getPages());
+            System.out.println(list.getTotal());
+            System.out.println(list.getSize());
+            System.out.println(list.getCurrent());
+            System.out.println(list.getRecords());
+        }
+
     }
 
 }
