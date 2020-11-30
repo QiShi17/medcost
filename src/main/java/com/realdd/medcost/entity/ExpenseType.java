@@ -1,7 +1,8 @@
 package com.realdd.medcost.entity;
 
-import java.time.LocalDateTime;
 import java.io.Serializable;
+import java.util.Date;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -35,10 +36,10 @@ public class ExpenseType implements Serializable {
     private Float lRatio;
 
     @ApiModelProperty(value = "创建时间")
-    private LocalDateTime createTime;
+    private Date createTime;
 
     @ApiModelProperty(value = "修改时间")
-    private LocalDateTime updateTime;
+    private Date updateTime;
 
 
 }

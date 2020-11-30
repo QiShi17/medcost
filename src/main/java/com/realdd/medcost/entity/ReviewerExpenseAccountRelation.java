@@ -1,7 +1,8 @@
 package com.realdd.medcost.entity;
 
-import java.time.LocalDateTime;
 import java.io.Serializable;
+import java.util.Date;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -27,12 +28,12 @@ public class ReviewerExpenseAccountRelation implements Serializable {
     private Long id;
 
     @ApiModelProperty(value = "审核人学工号")
-    private Long reviewerIdNum;
+    private String reviewerIdNum;
 
     private Long expenseAccountId;
 
     @ApiModelProperty(value = "审核负责人学工号")
-    private Long reviewerMasterIdNum;
+    private String reviewerMasterIdNum;
 
     @ApiModelProperty(value = "修改意见")
     private String comment;
@@ -46,10 +47,10 @@ public class ReviewerExpenseAccountRelation implements Serializable {
     private Double total;
 
     @ApiModelProperty(value = "创建时间")
-    private LocalDateTime createTime;
+    private Date createTime;
 
     @ApiModelProperty(value = "修改时间")
-    private LocalDateTime updateTime;
+    private Date updateTime;
 
 
 }
