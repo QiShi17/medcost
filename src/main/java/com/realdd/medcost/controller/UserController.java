@@ -13,6 +13,7 @@ import com.realdd.medcost.common.utils.FileUtil;
 import com.realdd.medcost.dto.UserLoginParam;
 import com.realdd.medcost.entity.Role;
 import com.realdd.medcost.entity.User;
+import com.realdd.medcost.service.OssService;
 import com.realdd.medcost.service.RoleService;
 import com.realdd.medcost.service.UserService;
 import io.swagger.annotations.Api;
@@ -45,6 +46,8 @@ public class UserController {
     private UserService userService;
     @Autowired
     private RoleService roleService;
+    @Autowired
+    private OssService ossService;
     @Value("${jwt.tokenHeader}")
     private String tokenHeader;
     @Value("${jwt.tokenHead}")
@@ -196,4 +199,14 @@ public class UserController {
         if(success) return CommonResult.success(null);
         else return  CommonResult.failed("导入文件失败");
     }
+
+    @ApiOperation(value = "导入清单", notes = "import", produces = "application/octet-stream")
+    @PostMapping("/import_excel")
+    public CommonResult<Object> importExcel(@RequestParam("filename") String filename) {
+        Boolean success=ossService.getUserExcel(filename);
+        if(success) return CommonResult.success(null);
+        else return  CommonResult.failed("导入文件失败");
+    }
+
+
     }

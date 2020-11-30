@@ -29,10 +29,10 @@
 
     <insert id="insertBatchDuplicate"  useGeneratedKeys="true" keyProperty="id" keyColumn="id">
 insert
-into user (username, realname, password, gender, age, type, school, major, grade, department)
+into user (username, realname, password, gender, age, type, school, major, grade, department,update_time,login_time,create_time)
 values
 <foreach collection="list" item="item" index="index" separator=",">
- (#{item.username},#{item.realname},#{item.password},#{item.gender},#{item.age},#{item.type},#{item.school},#{item.major},#{item.grade},#{item.department})</foreach>ON DUPLICATE KEY UPDATE realname=values(realname),password=values(password),gender=values(gender),age=values(age),type=values(type),school=values(school),major=values(major),grade=values(grade),department=values(department)
+ (#{item.username},#{item.realname},#{item.password},#{item.gender},#{item.age},#{item.type},#{item.school},#{item.major},#{item.grade},#{item.department},#{item.updateTime},#{item.loginTime},#{item.createTime})</foreach>ON DUPLICATE KEY UPDATE realname=values(realname),password=values(password),gender=values(gender),age=values(age),type=values(type),school=values(school),major=values(major),grade=values(grade),department=values(department),update_time=values(update_time),login_time=values(login_time),create_time=values(create_time)
 </insert>
 
 

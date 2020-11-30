@@ -24,7 +24,7 @@ public class ReviewHistory implements Serializable {
     private Long id;
 
     @ApiModelProperty(value = "审核人学工号")
-    private Long reviewerIdNum;
+    private String reviewerIdNum;
 
 
     @ApiModelProperty(value = "审核人姓名")
@@ -33,7 +33,7 @@ public class ReviewHistory implements Serializable {
     private Long expenseAccountId;
 
     @ApiModelProperty(value = "审核负责人学工号")
-    private Long reviewerMasterIdNum;
+    private String reviewerMasterIdNum;
 
     @ApiModelProperty(value = "审核负责人姓名")
     private String reviewerMasterName;

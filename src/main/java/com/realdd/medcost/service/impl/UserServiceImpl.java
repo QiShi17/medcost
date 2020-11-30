@@ -5,6 +5,9 @@ import cn.afterturn.easypoi.excel.entity.ImportParams;
 import cn.afterturn.easypoi.excel.entity.result.ExcelImportResult;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.StrUtil;
+import com.aliyun.oss.OSS;
+import com.aliyun.oss.OSSClient;
+import com.aliyun.oss.model.OSSObject;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -32,6 +35,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -46,7 +50,7 @@ import java.util.List;
  */
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
-    private static final Logger LOGGER =LoggerFactory.getLogger(UserServiceImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Autowired
     private UserDetailsService userDetailsService;
@@ -64,9 +68,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Override
     public User getUserByUsername(String username) {
         User user;
-        List<User> userList=getUserListByUsername(username);
-        if(userList!=null && userList.size()>0){
-            user=userList.get(0);
+        List<User> userList = getUserListByUsername(username);
+        if (userList != null && userList.size() > 0) {
+            user = userList.get(0);
             return user;
         }
         return null;
@@ -74,13 +78,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Override
     public User register(User userParam) {
-        User user=new User();
-        BeanUtils.copyProperties(userParam,user);
-      //  user.setCreateTime(new Date());
+        User user = new User();
+        BeanUtils.copyProperties(userParam, user);
+        //  user.setCreateTime(new Date());
         //user.setUpdateTime(user.getCreateTime());
         //查询是否有相同用户名的用户
-        List<User> userList=getUserListByUsername(user.getUsername());
-        if(userList.size()>0){
+        List<User> userList = getUserListByUsername(user.getUsername());
+        if (userList.size() > 0) {
             return null;
         }
         String encodePassword = passwordEncoder.encode(user.getPassword());
@@ -116,19 +120,19 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 ////            example.or(example.createCriteria().andNickNameLike("%" + keyword + "%"));
 ////        }
 ////        return userMapper.selectByExample(example);
-        Page<User> page = new Page<>(pageNum,pageSize);
+        Page<User> page = new Page<>(pageNum, pageSize);
         QueryWrapper<User> wrapper = new QueryWrapper<>();
         LambdaQueryWrapper<User> lambda = wrapper.lambda();
-        if(StrUtil.isNotEmpty(keyword)){
-            lambda.like(User::getUsername,keyword);
-            lambda.or().like(User::getRealname,keyword);
+        if (StrUtil.isNotEmpty(keyword)) {
+            lambda.like(User::getUsername, keyword);
+            lambda.or().like(User::getRealname, keyword);
         }
-        return (Page<User>) page(page,wrapper);
+        return (Page<User>) page(page, wrapper);
     }
 
-    private List<User> getUserListByUsername(String username){
-        QueryWrapper<User> wrapper=new QueryWrapper<>();
-        wrapper.lambda().eq(User::getUsername,username);
+    private List<User> getUserListByUsername(String username) {
+        QueryWrapper<User> wrapper = new QueryWrapper<>();
+        wrapper.lambda().eq(User::getUsername, username);
         return list(wrapper);
     }
 
@@ -136,14 +140,14 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     public boolean update(Long id, User user) {
         user.setId(id);
         User rawUser = getById(id);
-        if(rawUser.getPassword().equals(user.getPassword())){
+        if (rawUser.getPassword().equals(user.getPassword())) {
             //与原加密密码相同的不需要修改
             user.setPassword(null);
-        }else{
+        } else {
             //与原加密密码不同的需要加密修改
-            if(StrUtil.isEmpty(user.getPassword())){
+            if (StrUtil.isEmpty(user.getPassword())) {
                 user.setPassword(null);
-            }else{
+            } else {
                 user.setPassword(passwordEncoder.encode(user.getPassword()));
             }
         }
@@ -152,7 +156,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     @Override
-    public User insertUserIdTypeAuto(User user){
+    public User insertUserIdTypeAuto(User user) {
         LOGGER.info("inserUserId执行");
         saveOrUpdate(user);
         return user;
@@ -160,8 +164,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Override
     public boolean insertBatchUserDuplicateEncodePwd(List<User> userList) {
-        for(User user:userList){
-            if(!StrUtil.isEmpty(user.getPassword())){
+        for (User user : userList) {
+            if (!StrUtil.isEmpty(user.getPassword())) {
                 user.setPassword(passwordEncoder.encode(user.getPassword()));
             }
         }
@@ -178,7 +182,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
         // 需要验证
         importParams.setNeedVerfiy(true);
-        boolean success=false;
+        boolean success = false;
         try {
             ExcelImportResult<User> result = ExcelImportUtil.importExcelMore(file.getInputStream(), User.class,
                     importParams);
@@ -187,10 +191,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             for (User demoExcel : successList) {
                 System.out.println(demoExcel);
             }
-            success=insertBatchUserDuplicateEncodePwd(successList);
-        }  catch (Exception e) {
+            success = insertBatchUserDuplicateEncodePwd(successList);
+        } catch (Exception e) {
             throw new ApiException(e.getMessage());
-        }finally {
+        } finally {
             return success;
         }
     }
@@ -200,7 +204,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         int count = roleIds == null ? 0 : roleIds.size();
         //先删除原来的关系
         QueryWrapper<UserRoleRelation> wrapper = new QueryWrapper<>();
-        wrapper.lambda().eq(UserRoleRelation::getUserId,userId);
+        wrapper.lambda().eq(UserRoleRelation::getUserId, userId);
         userRoleRelationService.remove(wrapper);
         //建立新关系
         if (!CollectionUtils.isEmpty(roleIds)) {
@@ -222,4 +226,31 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 //        super.saveOrUpdate(entity);
 //        return false;
 //    }
-}
+
+    @Override
+    public boolean insertUserByExcel(InputStream fileStream) {
+        ImportParams importParams = new ImportParams();
+        // 数据处理
+        importParams.setHeadRows(1);
+        importParams.setTitleRows(1);
+
+        // 需要验证
+        importParams.setNeedVerfiy(true);
+        boolean success = false;
+        try {
+            ExcelImportResult<User> result = ExcelImportUtil.importExcelMore(fileStream, User.class,
+                    importParams);
+
+            List<User> successList = result.getList();
+            for (User demoExcel : successList) {
+                System.out.println(demoExcel);
+            }
+            success = insertBatchUserDuplicateEncodePwd(successList);
+        } catch (Exception e) {
+            throw new ApiException(e.getMessage());
+        } finally {
+            return success;
+        }
+    }
+
+    }

@@ -31,6 +31,9 @@ public class AccountInfoBrief implements Serializable {
     @ApiModelProperty(value = "报销类型")
     private Integer expenseTypeId;
 
+    @ApiModelProperty(value = "报销类型名")
+    private String name;
+
     @ApiModelProperty(value = "关联学工号")
     private String username;
 

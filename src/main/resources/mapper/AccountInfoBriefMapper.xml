@@ -8,17 +8,72 @@
         <result column="realname" property="realname"/>
         <result column="disease" property="disease"/>
         <result column="expense_type_id" property="expenseTypeId"/>
+        <result column="name" property="name"/>
         <result column="invoice_fee" property="invoiceFee"/>
         <result column="regist_fee" property="registFee"/>
         <result column="create_time" property="createTime"/>
         <result column="status" property="status"/>
+        <collection column="id" property="reviewHistoryList"
+                    select="com.realdd.medcost.mapper.ReviewHistoryMapper.listReviewHistoryByAccountId"/>
     </resultMap>
 
     <select id="userAndAccountInfoPage" resultType="com.realdd.medcost.dto.AccountInfoBrief">
-        select ea.id,ea.serial_num,ea.username,ea.disease,ea.expense_type_id,ea.invoice_fee,ea.regist_fee,ea.create_time,ea.status,u.realname
-        from expense_account ea,user u
-        where ea.username=u.username
-
+        SELECT
+            ea.id,ea.serial_num,
+            ea.username,ea.disease,
+            ea.expense_type_id,et.name,
+            ea.invoice_fee,ea.regist_fee,
+            ea.create_time,ea.status,u.realname
+        FROM
+            (expense_account ea
+            left join user u on ea.username=u.username)
+            left join expense_type et on ea.expense_type_id=et.id
     </select>
+
+    <select id="userAndAccountInfoPageReview" resultMap="AccountInfoBriefResultMap">
+        SELECT
+            ea.id,ea.serial_num,
+            ea.username,ea.disease,
+            ea.expense_type_id,et.name,
+            ea.invoice_fee,ea.regist_fee,
+            ea.create_time,ea.status,u.realname
+        FROM
+            (expense_account ea
+            left join user u on ea.username=u.username)
+            left join expense_type et on ea.expense_type_id=et.id
+        <if test="status!=null">
+            WHERE ea.status=#{status}
+        </if>
+        <if test="excludeUsername!=null">
+            AND ea.username!=#{excludeUsername}
+        </if>
+        <if test="idList !=null and idList.size>0 ">
+            AND ea.id IN
+            <foreach collection="idList" item="id" index="index" open="(" close=")" separator=",">
+                #{id}
+            </foreach>
+        </if>
+    </select>
+
+
+    <select id="userAndAccountInfoPageSubmit" resultMap="AccountInfoBriefResultMap">
+        SELECT
+        ea.id,ea.serial_num,
+        ea.username,ea.disease,
+        ea.expense_type_id,et.name,
+        ea.invoice_fee,ea.regist_fee,
+        ea.create_time,ea.status,u.realname
+        FROM
+        (expense_account ea
+        left join user u on ea.username=u.username)
+        left join expense_type et on ea.expense_type_id=et.id
+        <if test="status!=null">
+            WHERE ea.status=#{status}
+        </if>
+        <if test="username!=null">
+            AND ea.username=#{username}
+        </if>
+    </select>
+
 
 </mapper>

@@ -62,7 +62,7 @@ public class User implements Serializable {
     @ApiModelProperty(value = "最后登录时间")
     private Date loginTime;
 
-    @Excel(name = "创建时间", exportFormat = "yyyy-MM-dd hh:mm:ss",importFormat = "yyyy-MM-dd hh:mm:ss")
+    @Excel(name = "创建时间", exportFormat = "yyyy-MM-dd hh:mm:ss",importFormat = "yyyy-MM-dd hh:mm:ss",databaseFormat = "yyyy-MM-dd hh:mm:ss")
     @ApiModelProperty(value = "创建时间")
     @TableField(fill= FieldFill.INSERT)
     private Date createTime;

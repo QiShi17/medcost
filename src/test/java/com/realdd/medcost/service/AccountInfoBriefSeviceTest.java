@@ -12,11 +12,23 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 public class AccountInfoBriefSeviceTest {
     @Autowired
-    AccountInfoBriefSevice accountInfoBriefSevice;
+    AccountInfoBriefService accountInfoBriefService;
 
     @Test
     void getAccountInforBriefs(){
-        Page<AccountInfoBrief> accountInfoBriefs=accountInfoBriefSevice.getAccountInfoBriefPage(4,1);
+        Page<AccountInfoBrief> accountInfoBriefs= accountInfoBriefService.getAccountInfoBriefPage(4,1);
+        if(accountInfoBriefs!=null){
+            System.out.println(accountInfoBriefs.getPages());
+            System.out.println(accountInfoBriefs.getTotal());
+            System.out.println(accountInfoBriefs.getSize());
+            System.out.println(accountInfoBriefs.getCurrent());
+            System.out.println(accountInfoBriefs.getRecords());
+        }
+    }
+
+    @Test
+    void getAccountInforBriefs2(){
+        Page<AccountInfoBrief> accountInfoBriefs= accountInfoBriefService.getAccountInfoBriefPageReview(10,1,"123456789",6,"123456789");
         if(accountInfoBriefs!=null){
             System.out.println(accountInfoBriefs.getPages());
             System.out.println(accountInfoBriefs.getTotal());

@@ -4,8 +4,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.realdd.medcost.dto.AccountInfoBrief;
 import com.realdd.medcost.mapper.AccountInfoBriefMapper;
 import com.realdd.medcost.mapper.ReviewHistoryMapper;
-import com.realdd.medcost.service.AccountInfoBriefSevice;
-import org.apache.ibatis.annotations.Mapper;
+import com.realdd.medcost.service.AccountInfoBriefService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +15,7 @@ import java.util.List;
  */
 
 @Service("AccountInfoBriefService")
-public class AccountInfoBriefServiceImpl implements AccountInfoBriefSevice {
+public class AccountInfoBriefServiceImpl implements AccountInfoBriefService {
 
     @Autowired
     AccountInfoBriefMapper accountInfoBriefMapper;
@@ -31,6 +30,29 @@ public class AccountInfoBriefServiceImpl implements AccountInfoBriefSevice {
         for (AccountInfoBrief accountInfoBrief:accountInfoBriefList) {
             accountInfoBrief.setReviewHistoryList(reviewHistoryMapper.listReviewHistoryByAccountId(accountInfoBrief.getId()));
         }
+        return accountInfoBriefPage;
+    }
+
+    @Override
+    public Page<AccountInfoBrief> getAccountInfoBriefPageReview(Integer pageSize, Integer pageNum,String userIdNum,Integer status,String excludeUsername) {
+        List<Long> accountList=null;
+        Page<AccountInfoBrief> accountInfoBriefPage=null;
+        if(userIdNum!=null){
+            accountList= reviewHistoryMapper.listReviewHistoryByReviewerId(userIdNum);
+            if(accountList.size()==0) {
+                accountInfoBriefPage=new Page<AccountInfoBrief>();
+                accountInfoBriefPage.setSize(pageSize);
+                accountInfoBriefPage.setCurrent(1);
+                return accountInfoBriefPage;
+            }
+        }
+        accountInfoBriefPage=accountInfoBriefMapper.userAndAccountInfoPageReview(new Page<>(pageNum,pageSize),accountList,status,excludeUsername);
+        return accountInfoBriefPage;
+    }
+
+    @Override
+    public Page<AccountInfoBrief> getAccountInfoBriefPageSubmit(Integer pageSize, Integer pageNum, String username, Integer status) {
+        Page<AccountInfoBrief> accountInfoBriefPage=accountInfoBriefMapper.userAndAccountInfoPageSubmit(new Page<>(pageNum,pageSize),username,status);
         return accountInfoBriefPage;
     }
 }

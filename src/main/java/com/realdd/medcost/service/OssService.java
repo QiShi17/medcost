@@ -17,4 +17,16 @@ public interface OssService {
      * oss上传成功回调
      */
     OssCallbackResult callback(HttpServletRequest request);
+
+    /**
+     * oss上传excel策略生成
+     */
+    OssPolicyResult policyExcel();
+    /**
+     * oss上传成功回调
+     */
+    OssCallbackResult callbackExcel(HttpServletRequest request);
+
+
+    boolean getUserExcel(String filename);
 }

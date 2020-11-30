@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.InputStream;
 import java.util.List;
 
 /**
@@ -57,5 +58,8 @@ public interface UserService extends IService<User> {
     boolean insertBatchUserDuplicateEncodePwd(List<User> userList);
 
     boolean insertUserByExcel(MultipartFile file);
+
+    boolean insertUserByExcel(InputStream fileStream);
+
 
 }
