@@ -1,7 +1,9 @@
 package com.realdd.medcost.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.realdd.medcost.entity.Department;
+import com.realdd.medcost.entity.User;
 
 /**
  * <p>
@@ -29,5 +31,10 @@ public interface DepartmentService extends IService<Department> {
      * 删除部门
      */
     boolean deleteDepartment(Long id);
+
+    /**
+     * 根据用户名或昵称分页查询用户
+     */
+    Page<Department> list(String keyword, Integer pageSize, Integer pageNum);
 
 }
