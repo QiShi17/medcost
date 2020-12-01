@@ -11,7 +11,7 @@
  Target Server Version : 80017
  File Encoding         : 65001
 
- Date: 17/11/2020 23:35:14
+ Date: 01/12/2020 14:39:12
 */
 
 SET NAMES utf8mb4;
@@ -28,7 +28,7 @@ CREATE TABLE `department`  (
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   `is_delete` tinyint(4) NOT NULL DEFAULT 1 COMMENT '逻辑删除',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf16 COLLATE = utf16_bin COMMENT = '部门表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf16 COLLATE = utf16_bin COMMENT = '部门表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of department
@@ -166,6 +166,7 @@ INSERT INTO `role` VALUES (1, 'USER', '普通用户', NULL, NULL);
 INSERT INTO `role` VALUES (2, 'ADMIN', '管理员', NULL, NULL);
 INSERT INTO `role` VALUES (3, 'REVIEWER', '审核人', NULL, NULL);
 INSERT INTO `role` VALUES (4, 'MASTER', NULL, NULL, NULL);
+INSERT INTO `role` VALUES (5, 'DELIVER', '收单员', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for user
@@ -189,7 +190,7 @@ CREATE TABLE `user`  (
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `id_num_UNIQUE`(`username`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 40 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 41 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user
@@ -199,6 +200,7 @@ INSERT INTO `user` VALUES (35, '3de3', 'string', '$2a$10$4iZO9tLHFm3KRC87tm7tyOh
 INSERT INTO `user` VALUES (37, 'master', '审核负责人', '$2a$10$OHi1BAkeUK07sWKVmpZKv.qw2SYdIfqAqFvZOJBhX4aerdYoHf.Ka', 0, 24, 0, '2020-10-24 21:46:42', '2020-10-24 21:49:22', 'string', 'string', 0, '审核部门', 0, NULL);
 INSERT INTO `user` VALUES (38, 'reviewer', '测试审核员', '123456', 0, 23, 1, '2020-11-05 20:37:10', '2020-10-24 22:37:15', '', '计算机科学与技术', 2020, '审核部门', 0, '2020-11-14 20:39:03');
 INSERT INTO `user` VALUES (39, 'weiser', '徐维泽', '123456', 0, 22, 1, '2020-11-05 20:36:20', '2020-10-30 11:29:34', '计算机学院', '计算机科学与技术', 2016, '', 0, '2020-10-30 11:30:11');
+INSERT INTO `user` VALUES (40, 'xwz', 'string', '$2a$10$1XpcZMNVNbHqcA4o7Yat9.gkpDV/zNjDQtJ3SYXhQT8jLUAwCLIcy', 0, 0, 1, '2020-11-30 19:55:23', '2020-11-30 19:56:41', 'string', 'string', 0, 'string', 0, '2020-11-30 19:56:41');
 
 -- ----------------------------
 -- Table structure for user_role_relation
@@ -211,7 +213,7 @@ CREATE TABLE `user_role_relation`  (
   `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '用户和角色关系表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '用户和角色关系表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user_role_relation
@@ -222,5 +224,10 @@ INSERT INTO `user_role_relation` VALUES (3, 37, 2, NULL, NULL);
 INSERT INTO `user_role_relation` VALUES (4, 37, 4, NULL, NULL);
 INSERT INTO `user_role_relation` VALUES (5, 38, 3, NULL, NULL);
 INSERT INTO `user_role_relation` VALUES (6, 1, 1, NULL, NULL);
+INSERT INTO `user_role_relation` VALUES (7, 40, 1, NULL, NULL);
+INSERT INTO `user_role_relation` VALUES (8, 40, 2, NULL, NULL);
+INSERT INTO `user_role_relation` VALUES (9, 40, 3, NULL, NULL);
+INSERT INTO `user_role_relation` VALUES (10, 40, 4, NULL, NULL);
+INSERT INTO `user_role_relation` VALUES (11, 40, 5, NULL, NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;
