@@ -39,7 +39,7 @@ public class ExpenseAccountServiceImpl extends ServiceImpl<ExpenseAccountMapper,
     }
 
     @Override
-    public List<AccountDetail> getAccountDetailByExpenseAccountId(Long expenseAccountId) {
+    public AccountDetail getAccountDetailByExpenseAccountId(Long expenseAccountId) {
         return this.accountDetailMapper.getAccountDetailByExpenseAccountId(expenseAccountId);
     }
 

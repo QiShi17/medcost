@@ -129,10 +129,11 @@ public class ExpenseAccountController {
     }
 
     @ApiOperation("获取详情页")
-    @GetMapping(value = "/detail")
-    public CommonResult<List<AccountDetail>> fetchAccountDetail() {
-        List<AccountDetail> accountDetailsList = expenseAccountService.getAccountDetailByExpenseAccountId((long) 1);
-        System.out.println(accountDetailsList);
-        return CommonResult.success(accountDetailsList);
+    @GetMapping(value = "/detail/{id}")
+    public CommonResult<AccountDetail> fetchAccountDetail(@PathVariable Long id) {
+        AccountDetail accountDetail = expenseAccountService.getAccountDetailByExpenseAccountId((long) id);
+        System.out.println(id);
+        System.out.println(accountDetail);
+        return CommonResult.success(accountDetail);
     }
 }

@@ -24,6 +24,6 @@ public interface ExpenseAccountService extends IService<ExpenseAccount> {
     /**
      * 获取ExpenseAccount的详情页
      */
-    List<AccountDetail> getAccountDetailByExpenseAccountId(Long expenseAccountId);
+    AccountDetail getAccountDetailByExpenseAccountId(Long expenseAccountId);
 
 }
