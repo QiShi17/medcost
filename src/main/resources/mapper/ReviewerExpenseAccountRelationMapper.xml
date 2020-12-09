@@ -1,5 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.realdd.medcost.mapper.ReviewerExpenseAccountRelationMapper">
+    <resultMap id="BaseResultMap" type="com.realdd.medcost.entity.ReviewerExpenseAccountRelation">
+        <id column="id" property="id" />
+        <result column="reviewer_id_num" property="reviewerIdNum" />
+        <result column="expense_account_id" property="expenseAccountId" />
+        <result column="reviewer_master_id_num" property="reviewerMasterIdNum" />
+        <result column="comment" property="comment" />
+        <result column="status" property="status" />
+        <result column="is_cancel" property="isCancel" />
+        <result column="total" property="total" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+    </resultMap>
 
+    <insert id="add" parameterType="com.realdd.medcost.entity.ReviewerExpenseAccountRelation" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        insert into reviewer_expense_account_relation(reviewer_id_num, expense_account_id, reviewer_master_id_num, comment, status, is_cancel, total, create_time, update_time)
+        values(#{reviewerIdNum},#{expenseAccountId},#{reviewerMasterIdNum},#{comment},#{status},#{isCancel},#{total},#{createTime},#{updateTime})
+    </insert>
+
+    <select id="selectByExpenseAccountId" resultType="com.realdd.medcost.entity.ReviewerExpenseAccountRelation">
+        select rear.*
+        from reviewer_expense_account_relation rear
+        where rear.expense_account_id=#{expenseAccountId} and rear.status=1
+    </select>
+
+    <update id="update" parameterType="com.realdd.medcost.entity.ReviewerExpenseAccountRelation">
+        update reviewer_expense_account_relation
+        set is_cancel=1 ,
+            reviewer_master_id_num=#{masterUsername} ,
+            update_time=#{updateTime}
+        where expense_account_id=#{expenseAccountId} and status=1
+    </update>
 </mapper>

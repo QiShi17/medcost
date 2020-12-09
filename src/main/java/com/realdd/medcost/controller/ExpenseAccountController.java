@@ -17,6 +17,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.print.DocFlavor;
 import java.security.Principal;
 import java.util.List;
 
@@ -131,9 +132,39 @@ public class ExpenseAccountController {
     @ApiOperation("获取详情页")
     @GetMapping(value = "/detail/{id}")
     public CommonResult<AccountDetail> fetchAccountDetail(@PathVariable Long id) {
+        System.out.println("进入");
         AccountDetail accountDetail = expenseAccountService.getAccountDetailByExpenseAccountId((long) id);
-        System.out.println(id);
         System.out.println(accountDetail);
         return CommonResult.success(accountDetail);
+    }
+
+    @ApiOperation(value = "审核员同意单据")
+    @PostMapping("/agree/{expenseAccountId}")
+    public CommonResult agreeExpenseAccountById(@PathVariable Long expenseAccountId,@RequestParam("reviewerUsername") String reviewerUsername){
+        System.out.println("进入同意");
+        boolean success = expenseAccountService.agreeExpenseAccountById(expenseAccountId,reviewerUsername);
+        System.out.println(success);
+        if (success) return CommonResult.success(null);
+        return CommonResult.failed();
+    }
+
+    @ApiOperation(value = "审核员拒绝单据")
+    @PostMapping("/reject/{expenseAccountId}")
+    public CommonResult rejectExpenseAccountById(@PathVariable Long expenseAccountId,@RequestParam("reviewerUsername") String reviewerUsername,@RequestParam("comment") String comment){
+        System.out.println("进入拒绝");
+        boolean success = expenseAccountService.rejectExpenseAccountById(expenseAccountId,reviewerUsername,comment);
+        System.out.println(success);
+        if (success) return CommonResult.success(null);
+        return CommonResult.failed();
+    }
+
+    @ApiOperation(value = "负责人撤销同意的单据")
+    @PostMapping("/revoke/{expenseAccountId}")
+    public CommonResult revokeExpenseAccountById(@PathVariable Long expenseAccountId,@RequestParam("masterUsername") String masterUsername){
+        System.out.println("进入撤销");
+        boolean success = expenseAccountService.revokeExpenseAccountById(expenseAccountId,masterUsername);
+        System.out.println(success);
+        if (success) return CommonResult.success(null);
+        return CommonResult.failed();
     }
 }
