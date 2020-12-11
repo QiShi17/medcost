@@ -1,5 +1,7 @@
 package com.realdd.medcost.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.realdd.medcost.dto.ReviewStatistic;
 import com.realdd.medcost.entity.ReviewerExpenseAccountRelation;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -12,5 +14,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2020-11-12
  */
 public interface ReviewerExpenseAccountRelationService extends IService<ReviewerExpenseAccountRelation> {
+
+    Page<ReviewStatistic> getReviewStatistic(Integer pageSize, Integer pageNum);
 
 }
