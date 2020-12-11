@@ -27,7 +27,7 @@ public class ReviewRecord {
     private String reviewerRealname;
 
     @ApiModelProperty(value = "审核人学工号")
-    private Long reviewerIdNum;
+    private String reviewerIdNum;
 
     @ApiModelProperty(value = "状态")
     private Integer status;

@@ -4,7 +4,7 @@
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.realdd.medcost.dto.AccountDetail">
         <id column="eaid" property="id" />
-        <result column="status" property="status" />
+        <result column="eastatus" property="status" />
         <result column="serial_num" property="serialNum" />
         <result column="expense_type_id" property="expenseTypeId" />
         <result column="realname" property="realname" />
@@ -34,14 +34,14 @@
         <result column="create_time" property="createTime" />
         <result column="realname" property="reviewerRealname" />
         <result column="reviewer_id_num" property="reviewerIdNum" />
-        <result column="status" property="status" />
+        <result column="rearstatus" property="status" />
         <result column="comment" property="comment" />
     </resultMap>
 
     <select id="getAccountDetailByExpenseAccountId" resultMap="BaseResultMap">
         SELECT
             ea.id as eaid,
-            ea.status,
+            ea.status as eastatus,
             ea.serial_num,
             ea.expense_type_id,
             u.realname,
@@ -62,7 +62,7 @@
             rear.create_time,
             reviewer.realname,
             rear.reviewer_id_num,
-            rear.status,
+            rear.status as rearstatus,
             rear.comment
         FROM user u,
              user reviewer,
@@ -73,6 +73,6 @@
               h.id=ea.f_hospital_id and
               ea.username=u.username and
               ea.id=rear.expense_account_id and
-              reviewer.id=rear.reviewer_id_num
+              reviewer.username=rear.reviewer_id_num
     </select>
 </mapper>

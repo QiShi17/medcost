@@ -16,5 +16,5 @@ import java.util.List;
 
 public interface AccountDetailMapper extends BaseMapper<AccountDetail> {
 
-    List<AccountDetail> getAccountDetailByExpenseAccountId(@Param("expenseAccountId")Long expenseAccountId);
+    AccountDetail getAccountDetailByExpenseAccountId(@Param("expenseAccountId")Long expenseAccountId);
 }

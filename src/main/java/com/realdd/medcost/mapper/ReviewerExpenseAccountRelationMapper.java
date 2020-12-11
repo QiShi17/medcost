@@ -6,6 +6,9 @@ import com.realdd.medcost.dto.ReviewStatistic;
 import com.realdd.medcost.entity.ReviewerExpenseAccountRelation;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.Date;
 
 /**
  * <p>
@@ -21,4 +24,11 @@ public interface ReviewerExpenseAccountRelationMapper extends BaseMapper<Reviewe
     //查看审核统计
     Page<ReviewStatistic> selectReview (Page<ReviewStatistic> page);
 
+    boolean add(ReviewerExpenseAccountRelation reviewerExpenseAccountRelation);
+
+    ReviewerExpenseAccountRelation selectByExpenseAccountId(@Param("expenseAccountId")Long userId);
+
+    boolean update(@Param("masterUsername")String masterUsername,
+                   @Param("updateTime")Date updateTime,
+                   @Param("expenseAccountId")Long expenseAccountId);
 }
