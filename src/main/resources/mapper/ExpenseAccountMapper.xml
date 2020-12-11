@@ -2,4 +2,40 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.realdd.medcost.mapper.ExpenseAccountMapper">
 
+    <select id="selectExpenseAccountTotal" resultType="java.lang.Double">
+        SELECT
+            r.total
+        FROM
+            reviewer_expense_account_relation r,
+            expense_account e
+        where
+            e.id = r.expense_account_id and e.id=#{expenseAccountId}
+    </select>
+
+
+    <select id="selectAnnualExpense" resultType="java.lang.Double">
+        SELECT
+            u.annual_expense
+        FROM
+            user u,
+            expense_account e
+        where
+            e.username = u.username and e.id=#{expenseAccountId}
+    </select>
+
+
+    <select id="selectUser" resultType="com.realdd.medcost.entity.User">
+        SELECT
+            u.*
+        FROM
+            user u,
+            expense_account e
+        where
+            e.username = u.username and e.id=#{expenseAccountId}
+    </select>
+
+
+
+
+
 </mapper>

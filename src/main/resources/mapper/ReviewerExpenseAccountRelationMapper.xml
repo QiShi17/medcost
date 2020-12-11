@@ -2,4 +2,38 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.realdd.medcost.mapper.ReviewerExpenseAccountRelationMapper">
 
+    <resultMap id="reviewList"  type="com.realdd.medcost.dto.ReviewStatistic">
+<!--        <id column="id" property="id"/>-->
+        <result column="username" property="reviewerIdNum"/>
+        <result column="realname" property="reviewerRealName"/>
+        <result column="mcount" property="mcount"/>
+        <result column="mcount" property="mcount"/>
+    </resultMap>
+
+    <select id="selectReview" resultMap="reviewList">
+        select
+            u.username,u.realname,ifnull(t.mcount,0) as mcount,ifnull(v.tcount,0) as tcount
+        from
+            (select
+                rear.reviewer_id_num as username,count(rear.reviewer_id_num) as tcount
+            from
+                reviewer_expense_account_relation rear
+            group by
+                reviewer_id_num) v
+        left join
+            user u
+        on
+            u.username = v.username
+        left join
+            (select
+                rear.reviewer_id_num as username,count(rear.reviewer_id_num) as mcount
+            from
+                reviewer_expense_account_relation rear
+            where
+                rear.is_cancel=1
+            group by
+                reviewer_id_num) t
+        on
+            u.username =t.username
+    </select>
 </mapper>

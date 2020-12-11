@@ -26,4 +26,11 @@ public interface ExpenseAccountService extends IService<ExpenseAccount> {
      */
     List<AccountDetail> getAccountDetailByExpenseAccountId(Long expenseAccountId);
 
+    /**
+     * 确认收单
+     * @param expenseAccountId
+     * @return
+     */
+    boolean deliverExpenseAccount(Long expenseAccountId);
+
 }

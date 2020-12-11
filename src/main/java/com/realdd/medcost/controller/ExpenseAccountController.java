@@ -135,4 +135,17 @@ public class ExpenseAccountController {
         System.out.println(accountDetailsList);
         return CommonResult.success(accountDetailsList);
     }
+
+
+    @ApiOperation(value = "确认收单")
+    @PostMapping("/deliver/{id}")
+    public CommonResult deliver(@PathVariable Long id){
+        boolean success = expenseAccountService.deliverExpenseAccount(id);
+        if (success) {
+            return CommonResult.success(null);
+        }
+        return CommonResult.failed();
+
+    }
+
 }
