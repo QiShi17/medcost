@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.realdd.medcost.mapper.Account2PrintMapper">
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.realdd.medcost.dto.Account2Print">
+        <id column="id" property="id" />
+        <result column="realname" property="realname" />
+        <result column="gender" property="gender" />
+        <result column="age" property="age" />
+        <result column="username" property="username" />
+        <result column="type" property="type" />
+        <result column="department" property="department" />
+        <result column="school" property="school" />
+        <result column="serial_num" property="serialNum" />
+        <result column="expense_type_id" property="expenseTypeId" />
+        <result column="f_hospital_name" property="fHospitalName" />
+        <result column="l_hospital_name" property="lHospitalName" />
+        <result column="room" property="room" />
+        <result column="regist_time" property="registTime" />
+        <result column="regist_fee" property="registFee" />
+        <result column="invoice_time" property="invoiceTime" />
+        <result column="invoice_fee" property="invoiceFee" />
+        <result column="total" property="total" />
+        <result column="disease" property="disease" />
+        <result column="reviewer_realname" property="reviewerRealName" />
+        <result column="update_time" property="reviewerAgreeTime" />
+    </resultMap>
+
+    <select id="getAccount2PrintByExpenseAccountId" resultMap="BaseResultMap">
+        select
+            u.realname,
+            u.gender,
+            u.age,
+            u.username,
+            u.type,
+            u.department,
+            u.school,
+            ea.serial_num,
+            ea.expense_type_id,
+            h.name as f_hospital_name,
+            ea.l_hospital_name,
+            ea.room,
+            ea.regist_time,
+            ea.regist_fee,
+            ea.invoice_time,
+            ea.invoice_fee,
+            rear.total,
+            ea.disease,
+            reviewer.realname as reviewer_realname,
+            rear.update_time
+        from
+            user u,
+            user reviewer,
+            hospital h,
+            reviewer_expense_account_relation rear,
+            expense_account ea
+        where
+            ea.id=#{expenseAccountId} and
+            ea.username=u.username and
+            ea.id=rear.expense_account_id and
+            ea.f_hospital_id=h.id and
+            rear.reviewer_id_num=reviewer.username and
+            rear.status=1
+    </select>
+</mapper>

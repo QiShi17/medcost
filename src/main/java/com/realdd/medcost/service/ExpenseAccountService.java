@@ -1,5 +1,6 @@
 package com.realdd.medcost.service;
 
+import com.realdd.medcost.dto.Account2Print;
 import com.realdd.medcost.dto.AccountDetail;
 import com.realdd.medcost.entity.Department;
 import com.realdd.medcost.entity.ExpenseAccount;
@@ -34,11 +35,13 @@ public interface ExpenseAccountService extends IService<ExpenseAccount> {
      */
     boolean deliverExpenseAccount(Long expenseAccountId);
 
-     /* 审核负责人将该id的单据撤销(改变状态为7)
+     /**  审核负责人将该id的单据撤销(改变状态为7)
      */
     boolean agreeExpenseAccountById(Long expenseAccountId,String reviewerUsername);
 
     boolean rejectExpenseAccountById(Long expenseAccountId,String reviewerUsername,String comment);
 
     boolean revokeExpenseAccountById(Long expenseAccountId,String masterUsername);
+
+    Account2Print getAccount2PrintByExpenseAccountId(Long expenseAccountId);
 }

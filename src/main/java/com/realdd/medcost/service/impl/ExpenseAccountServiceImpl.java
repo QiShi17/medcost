@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.realdd.medcost.common.utils.SerialNumberUtil;
+import com.realdd.medcost.dto.Account2Print;
 import com.realdd.medcost.dto.AccountDetail;
 import com.realdd.medcost.entity.ExpenseAccount;
 import com.realdd.medcost.entity.ReviewerExpenseAccountRelation;
@@ -43,6 +44,9 @@ public class ExpenseAccountServiceImpl extends ServiceImpl<ExpenseAccountMapper,
 
     @Autowired
     ExpenseAccountMapper expenseAccountMapper;
+
+    @Autowired
+    Account2PrintMapper account2PrintMapper;
 
     @Autowired
     UserMapper userMapper;
@@ -131,4 +135,12 @@ public class ExpenseAccountServiceImpl extends ServiceImpl<ExpenseAccountMapper,
         }
         return false;
     }
+
+    @Override
+    public Account2Print getAccount2PrintByExpenseAccountId(Long expenseAccountId) {
+        Account2Print account2Print=account2PrintMapper.getAccount2PrintByExpenseAccountId(expenseAccountId);
+        account2Print.setRate(account2Print.getTotal()/(account2Print.getInvoiceFee()+account2Print.getRegistFee()));
+        return account2Print;
+    }
+
 }
