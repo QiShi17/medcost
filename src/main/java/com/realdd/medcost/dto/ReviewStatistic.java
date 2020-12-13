@@ -34,9 +34,13 @@ public class ReviewStatistic implements Serializable {
     @ApiModelProperty(value = "审核人用户名")
     private String reviewerRealName;
 
-    private Integer mcount;
-
+    @ApiModelProperty(value = "审核人审核数")
     private Integer tcount;
 
+    @ApiModelProperty(value = "审核人审核错误数")
+    private Integer mcount;
+
+    @ApiModelProperty(value = "审核人错误率")
+    private Float percent;
 
 }

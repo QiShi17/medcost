@@ -34,7 +34,7 @@ public interface ExpenseAccountService extends IService<ExpenseAccount> {
      */
     boolean deliverExpenseAccount(Long expenseAccountId);
 
-     * 审核负责人将该id的单据撤销(改变状态为7)
+     /* 审核负责人将该id的单据撤销(改变状态为7)
      */
     boolean agreeExpenseAccountById(Long expenseAccountId,String reviewerUsername);
 

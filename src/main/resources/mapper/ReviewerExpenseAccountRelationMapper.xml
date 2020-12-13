@@ -15,16 +15,16 @@
     </resultMap>
 
     <resultMap id="reviewList"  type="com.realdd.medcost.dto.ReviewStatistic">
-<!--        <id column="id" property="id"/>-->
         <result column="username" property="reviewerIdNum"/>
         <result column="realname" property="reviewerRealName"/>
+        <result column="tcount" property="tcount"/>
         <result column="mcount" property="mcount"/>
-        <result column="mcount" property="mcount"/>
+        <result column="percent" property="percent"/>
     </resultMap>
 
     <select id="selectReview" resultMap="reviewList">
         select
-            u.username,u.realname,ifnull(t.mcount,0) as mcount,ifnull(v.tcount,0) as tcount
+            u.username,u.realname,ifnull(v.tcount,0) as tcount,ifnull(t.mcount,0) as mcount,ifnull((mcount/tcount),0) as percent
         from
             (select
                 rear.reviewer_id_num as username,count(rear.reviewer_id_num) as tcount
@@ -48,6 +48,7 @@
         on
             u.username =t.username
     </select>
+
     <insert id="add" parameterType="com.realdd.medcost.entity.ReviewerExpenseAccountRelation" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
         insert into reviewer_expense_account_relation(reviewer_id_num, expense_account_id, reviewer_master_id_num, comment, status, is_cancel, total, create_time, update_time)
         values(#{reviewerIdNum},#{expenseAccountId},#{reviewerMasterIdNum},#{comment},#{status},#{isCancel},#{total},#{createTime},#{updateTime})

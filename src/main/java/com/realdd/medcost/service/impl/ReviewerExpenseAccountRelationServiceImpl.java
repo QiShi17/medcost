@@ -31,7 +31,7 @@ public class ReviewerExpenseAccountRelationServiceImpl extends ServiceImpl<Revie
 
     @Override
     public Page<ReviewStatistic> getReviewStatistic(Integer pageSize, Integer pageNum) {
-        Page<ReviewStatistic> reviewStatisticPage = relationMapper.selectReview(new Page<>(pageSize,pageNum));
+        Page<ReviewStatistic> reviewStatisticPage = relationMapper.selectReview(new Page<>(pageNum,pageSize));
         return reviewStatisticPage;
     }
 }

@@ -5,7 +5,9 @@ import com.realdd.medcost.dto.ReviewStatistic;
 import com.realdd.medcost.service.impl.ReviewerExpenseAccountRelationServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
+@SpringBootTest
 public class ReviewerExpenseAccountRelationServiceTest {
 
     @Autowired
@@ -14,8 +16,6 @@ public class ReviewerExpenseAccountRelationServiceTest {
     @Test
     void getReviewStatistic(){
         Page<ReviewStatistic> reviewStatisticPage= relationService.getReviewStatistic(4,1);
-//        ReviewerExpenseAccountRelationService service = new ReviewerExpenseAccountRelationServiceImpl();
-//        Page<ReviewStatistic> reviewStatisticPage = service.getReviewStatistic(4,1);
         if(reviewStatisticPage!=null){
             System.out.println(reviewStatisticPage.getPages());
             System.out.println(reviewStatisticPage.getTotal());
