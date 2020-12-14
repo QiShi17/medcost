@@ -9,9 +9,11 @@ import com.realdd.medcost.common.value.AccountStatus;
 import com.realdd.medcost.dto.Account2Print;
 import com.realdd.medcost.dto.AccountDetail;
 import com.realdd.medcost.dto.AccountInfoBrief;
+import com.realdd.medcost.dto.AccountResultStatistic;
 import com.realdd.medcost.entity.ExpenseAccount;
 import com.realdd.medcost.entity.User;
 import com.realdd.medcost.service.AccountInfoBriefService;
+import com.realdd.medcost.service.AccountResultStatisticService;
 import com.realdd.medcost.service.ExpenseAccountService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.print.DocFlavor;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -39,6 +42,8 @@ public class ExpenseAccountController {
     ExpenseAccountService expenseAccountService;
     @Autowired
     AccountInfoBriefService accountInfoBriefService;
+    @Autowired
+    AccountResultStatisticService accountResultStatisticService;
     @Autowired
     UserInfoUtil userInfoUtil;
 
@@ -175,5 +180,25 @@ public class ExpenseAccountController {
         Account2Print account2Print = expenseAccountService.getAccount2PrintByExpenseAccountId((Long)id);
         System.out.println(account2Print);
         return CommonResult.success(account2Print);
+    }
+
+    @ApiOperation("统计各学院/部门的人数、报销金额")
+    @GetMapping(value = "/statistic")
+    public CommonResult<AccountResultStatistic> fetchAccountResultStatistic() {
+        System.out.println("进入统计结果");
+        AccountResultStatistic accountResultStatistic=new AccountResultStatistic();
+        List<String> departmentList=accountResultStatisticService.getAllDepartmentAndSchool();//找到所有部门和学院
+        List<User> userList=accountResultStatisticService.getAllUser();//找到所有用户
+        System.out.println(userList);
+        List<Integer>departmentAndSchooolNum = new ArrayList<Integer>();
+        for(int i=0;i<departmentList.size();i++) departmentAndSchooolNum.add(0);
+        for(int i=0;i<departmentList.size();i++)
+            for(int j=0;j<userList.size();j++)
+                if(departmentList.get(i).equals(userList.get(j).getDepartment())||departmentList.get(i).equals(userList.get(j).getSchool()))
+                    departmentAndSchooolNum.set(i,departmentAndSchooolNum.get(i)+1);
+        accountResultStatistic.setDepartmentAndSchoolList(departmentList);
+        accountResultStatistic.setDepartmentAndSchoolNumList(departmentAndSchooolNum);
+        System.out.println(accountResultStatistic);
+        return CommonResult.success(accountResultStatistic);
     }
 }
