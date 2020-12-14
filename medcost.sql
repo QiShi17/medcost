@@ -11,7 +11,7 @@
  Target Server Version : 80017
  File Encoding         : 65001
 
- Date: 14/12/2020 18:40:36
+ Date: 14/12/2020 20:00:39
 */
 
 SET NAMES utf8mb4;
@@ -77,10 +77,10 @@ CREATE TABLE `expense_account`  (
 -- ----------------------------
 -- Records of expense_account
 -- ----------------------------
-INSERT INTO `expense_account` VALUES (1, '111111', 1, 'http://medcost-oss.oss-cn-beijing.aliyuncs.com/medcost/images/20201201/offbg.png', '北医三院', '口腔科', '2020-12-16 20:41:29', 1, 'weiser', 'http://medcost-oss.oss-cn-beijing.aliyuncs.com/medcost/images/20201201/thinkpad_tab_bg.png', '2020-11-04 20:42:53', 50, '拔智齿', 'http://medcost-oss.oss-cn-beijing.aliyuncs.com/medcost/images/20201201/mini_apps.png', 'c://', '2020-11-13 20:43:30', 1200, 3, NULL, '2020-12-10 14:01:44');
-INSERT INTO `expense_account` VALUES (2, '222222', 1, 'http://medcost-oss.oss-cn-beijing.aliyuncs.com/medcost/images/20201201/offbg.png', '北医三院', '口腔科', '2020-12-16 20:41:29', 1, 'weiser', 'http://medcost-oss.oss-cn-beijing.aliyuncs.com/medcost/images/20201201/thinkpad_tab_bg.png', '2020-11-04 20:42:53', 50, '拔智齿', 'http://medcost-oss.oss-cn-beijing.aliyuncs.com/medcost/images/20201201/mini_apps.png', 'c://', '2020-11-13 20:43:30', 1200, 3, NULL, '2020-12-10 14:01:47');
-INSERT INTO `expense_account` VALUES (3, '20201201155752297635', 1, 'http://medcost-oss.oss-cn-beijing.aliyuncs.com/medcost/images/20201201/offbg.png', '大家覅f', '口腔科', '2020-12-03 00:00:00', 2, 'xwz', 'http://medcost-oss.oss-cn-beijing.aliyuncs.com/medcost/images/20201201/thinkpad_tab_bg.png', '2020-12-16 00:00:00', 43.02, '缴费记录浪费覅为覅肥沃u', 'http://medcost-oss.oss-cn-beijing.aliyuncs.com/medcost/images/20201201/mini_apps.png', 'http://medcost-oss.oss-cn-beijing.aliyuncs.com/medcost/images/20201201/thinkpad_tab_bg.png', '2020-12-09 00:00:00', 3234, 2, '2020-12-01 15:57:53', NULL);
-INSERT INTO `expense_account` VALUES (5, '20201214113756123886', 2, '', '', '放射科', NULL, 2, 'weiser', 'http://medcost-oss.oss-cn-beijing.aliyuncs.com/medcost/images/20201214/u=3868564487,3858491216&fm=26&gp=0.jpg', '2020-12-24 00:00:00', 100, '含笑半步癫', 'http://medcost-oss.oss-cn-beijing.aliyuncs.com/medcost/images/20201214/u=3868564487,3858491216&fm=26&gp=0.jpg', 'http://medcost-oss.oss-cn-beijing.aliyuncs.com/medcost/images/20201214/u=3868564487,3858491216&fm=26&gp=0.jpg', '2020-12-02 00:00:00', 1000, 3, '2020-12-14 11:37:56', '2020-12-14 12:50:36');
+INSERT INTO `expense_account` VALUES (7, '20201214193945402916', 1, 'http://medcost-oss.oss-cn-beijing.aliyuncs.com/medcost/images/20201214/u=3868564487,3858491216&fm=26&gp=0.jpg', 'vhg', 'hgh', '2020-12-03 00:00:00', 2, 'weiser', 'http://medcost-oss.oss-cn-beijing.aliyuncs.com/medcost/images/20201214/u=3868564487,3858491216&fm=26&gp=0.jpg', '2020-12-05 00:00:00', 78, 'hggh', 'http://medcost-oss.oss-cn-beijing.aliyuncs.com/medcost/images/20201214/u=3868564487,3858491216&fm=26&gp=0.jpg', 'http://medcost-oss.oss-cn-beijing.aliyuncs.com/medcost/images/20201214/u=3868564487,3858491216&fm=26&gp=0.jpg', '2020-12-11 00:00:00', 30, 5, '2020-12-14 19:39:45', '2020-12-14 19:43:04');
+INSERT INTO `expense_account` VALUES (8, '20201214194426279935', 1, '', '', 'yhjgfh', NULL, 2, 'weiser', 'http://medcost-oss.oss-cn-beijing.aliyuncs.com/medcost/images/20201214/u=3868564487,3858491216&fm=26&gp=0.jpg', '2020-12-17 00:00:00', 34, 'fghgfh', 'http://medcost-oss.oss-cn-beijing.aliyuncs.com/medcost/images/20201214/u=3868564487,3858491216&fm=26&gp=0.jpg', 'http://medcost-oss.oss-cn-beijing.aliyuncs.com/medcost/images/20201214/u=3868564487,3858491216&fm=26&gp=0.jpg', '2020-12-18 00:00:00', 567, 6, '2020-12-14 19:44:26', '2020-12-14 19:45:02');
+INSERT INTO `expense_account` VALUES (9, '20201214194641892614', 2, '', '', 'fgdfg', NULL, 2, 'weiser', 'http://medcost-oss.oss-cn-beijing.aliyuncs.com/medcost/images/20201214/u=3868564487,3858491216&fm=26&gp=0.jpg', '2020-12-17 00:00:00', 345, 'dfg', 'http://medcost-oss.oss-cn-beijing.aliyuncs.com/medcost/images/20201214/u=3868564487,3858491216&fm=26&gp=0.jpg', 'http://medcost-oss.oss-cn-beijing.aliyuncs.com/medcost/images/20201214/u=3868564487,3858491216&fm=26&gp=0.jpg', '2020-12-10 00:00:00', 56, 4, '2020-12-14 19:46:42', '2020-12-14 19:47:23');
+INSERT INTO `expense_account` VALUES (10, '20201214195446067628', 2, '', '', 'fgdfg', NULL, 2, 'weiser', 'http://medcost-oss.oss-cn-beijing.aliyuncs.com/medcost/images/20201214/u=3868564487,3858491216&fm=26&gp=0.jpg', '2020-12-17 00:00:00', 345, 'dfg', 'http://medcost-oss.oss-cn-beijing.aliyuncs.com/medcost/images/20201214/u=3868564487,3858491216&fm=26&gp=0.jpg', 'http://medcost-oss.oss-cn-beijing.aliyuncs.com/medcost/images/20201214/u=3868564487,3858491216&fm=26&gp=0.jpg', '2020-12-10 00:00:00', 56, 3, '2020-12-14 19:54:46', '2020-12-14 19:55:20');
 
 -- ----------------------------
 -- Table structure for expense_type
@@ -100,9 +100,10 @@ CREATE TABLE `expense_type`  (
 -- Records of expense_type
 -- ----------------------------
 INSERT INTO `expense_type` VALUES (1, '学生报销', NULL, NULL, NULL, NULL);
-INSERT INTO `expense_type` VALUES (2, '职工报销', NULL, NULL, NULL, NULL);
-INSERT INTO `expense_type` VALUES (3, '离休人员报销', NULL, NULL, NULL, NULL);
-INSERT INTO `expense_type` VALUES (4, '其他人员报销', NULL, NULL, NULL, NULL);
+INSERT INTO `expense_type` VALUES (2, '在职员工报销', NULL, NULL, NULL, NULL);
+INSERT INTO `expense_type` VALUES (3, '退休人员报销', NULL, NULL, NULL, NULL);
+INSERT INTO `expense_type` VALUES (4, '离休人员报销', NULL, NULL, NULL, NULL);
+INSERT INTO `expense_type` VALUES (5, '其他报销', NULL, NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for hospital
@@ -144,13 +145,10 @@ CREATE TABLE `reviewer_expense_account_relation`  (
 -- ----------------------------
 -- Records of reviewer_expense_account_relation
 -- ----------------------------
-INSERT INTO `reviewer_expense_account_relation` VALUES (1, 'reviewer', 1, 'master', '没有转诊单', 0, NULL, 1500, '2020-11-06 20:56:21', '2020-11-11 20:56:25');
-INSERT INTO `reviewer_expense_account_relation` VALUES (2, 'reviewer', 1, 'master', '没有挂号单', 0, NULL, 1500, NULL, NULL);
-INSERT INTO `reviewer_expense_account_relation` VALUES (3, 'reviewer', 2, 'master', '没有转诊单', 0, NULL, NULL, NULL, NULL);
-INSERT INTO `reviewer_expense_account_relation` VALUES (15, 'xwz', 1, NULL, NULL, 1, 0, 1250, '2020-12-10 14:01:44', '2020-12-10 14:01:44');
-INSERT INTO `reviewer_expense_account_relation` VALUES (16, 'xwz', 2, NULL, NULL, 1, 0, 1250, '2020-12-10 14:01:47', '2020-12-10 14:01:47');
-INSERT INTO `reviewer_expense_account_relation` VALUES (17, 'xwz', 5, NULL, NULL, 1, 0, 880, '2020-12-14 12:49:21', '2020-12-14 12:49:21');
-INSERT INTO `reviewer_expense_account_relation` VALUES (18, 'xwz', 5, NULL, NULL, 1, 0, 880, '2020-12-14 12:50:37', '2020-12-14 12:50:37');
+INSERT INTO `reviewer_expense_account_relation` VALUES (20, 'xwz', 7, NULL, NULL, 1, 0, 86.4, '2020-12-14 19:40:28', '2020-12-14 19:40:28');
+INSERT INTO `reviewer_expense_account_relation` VALUES (21, 'xwz', 8, 'xwz', NULL, 1, 1, 480.8, '2020-12-14 19:44:51', '2020-12-14 19:45:02');
+INSERT INTO `reviewer_expense_account_relation` VALUES (22, 'xwz', 9, NULL, '就不同意咋的', 0, NULL, NULL, '2020-12-14 19:47:23', '2020-12-14 19:47:23');
+INSERT INTO `reviewer_expense_account_relation` VALUES (23, 'xwz', 10, NULL, NULL, 1, 0, 320.8, '2020-12-14 19:55:20', '2020-12-14 19:55:20');
 
 -- ----------------------------
 -- Table structure for role
@@ -205,7 +203,7 @@ INSERT INTO `user` VALUES (1, '2020212029', '史祺', '$2a$10$5xiEj2d1qbuw9jfGAm
 INSERT INTO `user` VALUES (35, '3de3', 'string', '$2a$10$4iZO9tLHFm3KRC87tm7tyOhJ3d5yZ9pyxTelxA4IC/rLjGhR1caBy', 0, 0, 1, '2020-10-24 12:54:30', '2020-10-24 13:04:53', 'string', '', 0, 'string', 0, NULL);
 INSERT INTO `user` VALUES (37, 'master', '审核负责人', '$2a$10$OHi1BAkeUK07sWKVmpZKv.qw2SYdIfqAqFvZOJBhX4aerdYoHf.Ka', 0, 24, 0, '2020-10-24 21:46:42', '2020-10-24 21:49:22', 'string', '', 0, '财务部', 0, NULL);
 INSERT INTO `user` VALUES (38, 'reviewer', '测试审核员', '123456', 0, 23, 1, '2020-11-05 20:37:10', '2020-10-24 22:37:15', '', '计算机科学与技术', 2020, '财务部', 0, '2020-11-14 20:39:03');
-INSERT INTO `user` VALUES (39, 'weiser', '徐维泽', '$2a$10$1XpcZMNVNbHqcA4o7Yat9.gkpDV/zNjDQtJ3SYXhQT8jLUAwCLIcy', 0, 22, 1, '2020-11-05 20:36:20', '2020-10-30 11:29:34', '计算机学院', '计算机科学与技术', 2016, '财务部', 0, '2020-10-30 11:30:11');
+INSERT INTO `user` VALUES (39, 'weiser', '徐维泽', '$2a$10$1XpcZMNVNbHqcA4o7Yat9.gkpDV/zNjDQtJ3SYXhQT8jLUAwCLIcy', 0, 22, 1, '2020-11-05 20:36:20', '2020-10-30 11:29:34', '计算机学院', '计算机科学与技术', 2016, '财务部', 966, '2020-12-14 19:43:04');
 INSERT INTO `user` VALUES (40, 'xwz', 'string', '$2a$10$1XpcZMNVNbHqcA4o7Yat9.gkpDV/zNjDQtJ3SYXhQT8jLUAwCLIcy', 0, 0, 1, '2020-11-30 19:55:23', '2020-11-30 19:56:41', 'string', 'string', 0, 'string', 0, '2020-11-30 19:56:41');
 
 -- ----------------------------
