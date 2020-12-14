@@ -11,7 +11,7 @@
  Target Server Version : 80017
  File Encoding         : 65001
 
- Date: 01/12/2020 14:39:12
+ Date: 14/12/2020 18:40:36
 */
 
 SET NAMES utf8mb4;
@@ -28,12 +28,12 @@ CREATE TABLE `department`  (
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   `is_delete` tinyint(4) NOT NULL DEFAULT 1 COMMENT '逻辑删除',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf16 COLLATE = utf16_bin COMMENT = '部门表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf16 COLLATE = utf16_bin COMMENT = '部门表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of department
 -- ----------------------------
-INSERT INTO `department` VALUES (1, '计算机学院', NULL, NULL, 1);
+INSERT INTO `department` VALUES (1, '计算机学院', NULL, '2020-12-01 16:15:35', 1);
 INSERT INTO `department` VALUES (2, '信息学院', NULL, NULL, 1);
 INSERT INTO `department` VALUES (3, '金融学院', NULL, NULL, 1);
 INSERT INTO `department` VALUES (4, '管理学院', NULL, NULL, 1);
@@ -51,7 +51,7 @@ INSERT INTO `department` VALUES (12, '保卫处', NULL, NULL, 1);
 -- ----------------------------
 DROP TABLE IF EXISTS `expense_account`;
 CREATE TABLE `expense_account`  (
-  `id` bigint(20) NOT NULL,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `serial_num` char(20) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '流水号（时间戳17+随机码3）',
   `f_hospital_id` bigint(20) NULL DEFAULT NULL COMMENT '转诊前医院',
   `referral_img` varchar(500) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '转诊单照片',
@@ -77,8 +77,10 @@ CREATE TABLE `expense_account`  (
 -- ----------------------------
 -- Records of expense_account
 -- ----------------------------
-INSERT INTO `expense_account` VALUES (1, '111111', 1, 'c://', '北医三院', '口腔科', '2020-12-16 20:41:29', 1, 'weiser', 'c://', '2020-11-04 20:42:53', 50, '拔智齿', 'c://', 'c://', '2020-11-13 20:43:30', 1200, 1, NULL, NULL);
-INSERT INTO `expense_account` VALUES (2, '222222', 1, 'c://', '北医三院', '口腔科', '2020-12-16 20:41:29', NULL, 'weiser', 'c://', '2020-11-04 20:42:53', 50, '拔智齿', 'c://', 'c://', '2020-11-13 20:43:30', 1200, 1, NULL, NULL);
+INSERT INTO `expense_account` VALUES (1, '111111', 1, 'http://medcost-oss.oss-cn-beijing.aliyuncs.com/medcost/images/20201201/offbg.png', '北医三院', '口腔科', '2020-12-16 20:41:29', 1, 'weiser', 'http://medcost-oss.oss-cn-beijing.aliyuncs.com/medcost/images/20201201/thinkpad_tab_bg.png', '2020-11-04 20:42:53', 50, '拔智齿', 'http://medcost-oss.oss-cn-beijing.aliyuncs.com/medcost/images/20201201/mini_apps.png', 'c://', '2020-11-13 20:43:30', 1200, 3, NULL, '2020-12-10 14:01:44');
+INSERT INTO `expense_account` VALUES (2, '222222', 1, 'http://medcost-oss.oss-cn-beijing.aliyuncs.com/medcost/images/20201201/offbg.png', '北医三院', '口腔科', '2020-12-16 20:41:29', 1, 'weiser', 'http://medcost-oss.oss-cn-beijing.aliyuncs.com/medcost/images/20201201/thinkpad_tab_bg.png', '2020-11-04 20:42:53', 50, '拔智齿', 'http://medcost-oss.oss-cn-beijing.aliyuncs.com/medcost/images/20201201/mini_apps.png', 'c://', '2020-11-13 20:43:30', 1200, 3, NULL, '2020-12-10 14:01:47');
+INSERT INTO `expense_account` VALUES (3, '20201201155752297635', 1, 'http://medcost-oss.oss-cn-beijing.aliyuncs.com/medcost/images/20201201/offbg.png', '大家覅f', '口腔科', '2020-12-03 00:00:00', 2, 'xwz', 'http://medcost-oss.oss-cn-beijing.aliyuncs.com/medcost/images/20201201/thinkpad_tab_bg.png', '2020-12-16 00:00:00', 43.02, '缴费记录浪费覅为覅肥沃u', 'http://medcost-oss.oss-cn-beijing.aliyuncs.com/medcost/images/20201201/mini_apps.png', 'http://medcost-oss.oss-cn-beijing.aliyuncs.com/medcost/images/20201201/thinkpad_tab_bg.png', '2020-12-09 00:00:00', 3234, 2, '2020-12-01 15:57:53', NULL);
+INSERT INTO `expense_account` VALUES (5, '20201214113756123886', 2, '', '', '放射科', NULL, 2, 'weiser', 'http://medcost-oss.oss-cn-beijing.aliyuncs.com/medcost/images/20201214/u=3868564487,3858491216&fm=26&gp=0.jpg', '2020-12-24 00:00:00', 100, '含笑半步癫', 'http://medcost-oss.oss-cn-beijing.aliyuncs.com/medcost/images/20201214/u=3868564487,3858491216&fm=26&gp=0.jpg', 'http://medcost-oss.oss-cn-beijing.aliyuncs.com/medcost/images/20201214/u=3868564487,3858491216&fm=26&gp=0.jpg', '2020-12-02 00:00:00', 1000, 3, '2020-12-14 11:37:56', '2020-12-14 12:50:36');
 
 -- ----------------------------
 -- Table structure for expense_type
@@ -126,10 +128,10 @@ INSERT INTO `hospital` VALUES (3, '北医三院', NULL, NULL);
 -- ----------------------------
 DROP TABLE IF EXISTS `reviewer_expense_account_relation`;
 CREATE TABLE `reviewer_expense_account_relation`  (
-  `id` bigint(20) NOT NULL,
-  `reviewer_id_num` bigint(20) NULL DEFAULT NULL COMMENT '审核人学工号',
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `reviewer_id_num` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '审核人学工号',
   `expense_account_id` bigint(20) NULL DEFAULT NULL,
-  `reviewer_master_id_num` bigint(20) NULL DEFAULT NULL COMMENT '审核负责人学工号',
+  `reviewer_master_id_num` varchar(20) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '审核负责人学工号',
   `comment` varchar(500) CHARACTER SET utf8 COLLATE utf8_bin NULL DEFAULT NULL COMMENT '修改意见',
   `status` int(4) NULL DEFAULT NULL COMMENT '状态',
   `is_cancel` tinyint(4) NULL DEFAULT NULL,
@@ -137,14 +139,18 @@ CREATE TABLE `reviewer_expense_account_relation`  (
   `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '审核人报销单关系表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '审核人报销单关系表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of reviewer_expense_account_relation
 -- ----------------------------
-INSERT INTO `reviewer_expense_account_relation` VALUES (1, 38, 1, 37, '没有转诊单', 0, 0, 1500, '2020-11-06 20:56:21', '2020-11-11 20:56:25');
-INSERT INTO `reviewer_expense_account_relation` VALUES (2, 38, 1, 37, '没有挂号单', 0, 0, 1500, NULL, NULL);
-INSERT INTO `reviewer_expense_account_relation` VALUES (3, 38, 2, 39, '没有转诊单', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `reviewer_expense_account_relation` VALUES (1, 'reviewer', 1, 'master', '没有转诊单', 0, NULL, 1500, '2020-11-06 20:56:21', '2020-11-11 20:56:25');
+INSERT INTO `reviewer_expense_account_relation` VALUES (2, 'reviewer', 1, 'master', '没有挂号单', 0, NULL, 1500, NULL, NULL);
+INSERT INTO `reviewer_expense_account_relation` VALUES (3, 'reviewer', 2, 'master', '没有转诊单', 0, NULL, NULL, NULL, NULL);
+INSERT INTO `reviewer_expense_account_relation` VALUES (15, 'xwz', 1, NULL, NULL, 1, 0, 1250, '2020-12-10 14:01:44', '2020-12-10 14:01:44');
+INSERT INTO `reviewer_expense_account_relation` VALUES (16, 'xwz', 2, NULL, NULL, 1, 0, 1250, '2020-12-10 14:01:47', '2020-12-10 14:01:47');
+INSERT INTO `reviewer_expense_account_relation` VALUES (17, 'xwz', 5, NULL, NULL, 1, 0, 880, '2020-12-14 12:49:21', '2020-12-14 12:49:21');
+INSERT INTO `reviewer_expense_account_relation` VALUES (18, 'xwz', 5, NULL, NULL, 1, 0, 880, '2020-12-14 12:50:37', '2020-12-14 12:50:37');
 
 -- ----------------------------
 -- Table structure for role
@@ -196,10 +202,10 @@ CREATE TABLE `user`  (
 -- Records of user
 -- ----------------------------
 INSERT INTO `user` VALUES (1, '2020212029', '史祺', '$2a$10$5xiEj2d1qbuw9jfGAmjslOHQl8IevyYTFuciNzlyQHHZ6.PSQTnCW', 1, 22, 1, '2018-09-29 13:55:30', '2018-09-29 13:55:30', '计算机学院', '计算机科学与技术', 2020, '', 0, '2020-10-31 19:36:49');
-INSERT INTO `user` VALUES (35, '3de3', 'string', '$2a$10$4iZO9tLHFm3KRC87tm7tyOhJ3d5yZ9pyxTelxA4IC/rLjGhR1caBy', 0, 0, 0, '2020-10-24 12:54:30', '2020-10-24 13:04:53', 'string', 'string', 0, 'string', 0, NULL);
-INSERT INTO `user` VALUES (37, 'master', '审核负责人', '$2a$10$OHi1BAkeUK07sWKVmpZKv.qw2SYdIfqAqFvZOJBhX4aerdYoHf.Ka', 0, 24, 0, '2020-10-24 21:46:42', '2020-10-24 21:49:22', 'string', 'string', 0, '审核部门', 0, NULL);
-INSERT INTO `user` VALUES (38, 'reviewer', '测试审核员', '123456', 0, 23, 1, '2020-11-05 20:37:10', '2020-10-24 22:37:15', '', '计算机科学与技术', 2020, '审核部门', 0, '2020-11-14 20:39:03');
-INSERT INTO `user` VALUES (39, 'weiser', '徐维泽', '123456', 0, 22, 1, '2020-11-05 20:36:20', '2020-10-30 11:29:34', '计算机学院', '计算机科学与技术', 2016, '', 0, '2020-10-30 11:30:11');
+INSERT INTO `user` VALUES (35, '3de3', 'string', '$2a$10$4iZO9tLHFm3KRC87tm7tyOhJ3d5yZ9pyxTelxA4IC/rLjGhR1caBy', 0, 0, 1, '2020-10-24 12:54:30', '2020-10-24 13:04:53', 'string', '', 0, 'string', 0, NULL);
+INSERT INTO `user` VALUES (37, 'master', '审核负责人', '$2a$10$OHi1BAkeUK07sWKVmpZKv.qw2SYdIfqAqFvZOJBhX4aerdYoHf.Ka', 0, 24, 0, '2020-10-24 21:46:42', '2020-10-24 21:49:22', 'string', '', 0, '财务部', 0, NULL);
+INSERT INTO `user` VALUES (38, 'reviewer', '测试审核员', '123456', 0, 23, 1, '2020-11-05 20:37:10', '2020-10-24 22:37:15', '', '计算机科学与技术', 2020, '财务部', 0, '2020-11-14 20:39:03');
+INSERT INTO `user` VALUES (39, 'weiser', '徐维泽', '$2a$10$1XpcZMNVNbHqcA4o7Yat9.gkpDV/zNjDQtJ3SYXhQT8jLUAwCLIcy', 0, 22, 1, '2020-11-05 20:36:20', '2020-10-30 11:29:34', '计算机学院', '计算机科学与技术', 2016, '财务部', 0, '2020-10-30 11:30:11');
 INSERT INTO `user` VALUES (40, 'xwz', 'string', '$2a$10$1XpcZMNVNbHqcA4o7Yat9.gkpDV/zNjDQtJ3SYXhQT8jLUAwCLIcy', 0, 0, 1, '2020-11-30 19:55:23', '2020-11-30 19:56:41', 'string', 'string', 0, 'string', 0, '2020-11-30 19:56:41');
 
 -- ----------------------------
@@ -213,7 +219,7 @@ CREATE TABLE `user_role_relation`  (
   `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '用户和角色关系表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8 COLLATE = utf8_bin COMMENT = '用户和角色关系表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user_role_relation
@@ -229,5 +235,9 @@ INSERT INTO `user_role_relation` VALUES (8, 40, 2, NULL, NULL);
 INSERT INTO `user_role_relation` VALUES (9, 40, 3, NULL, NULL);
 INSERT INTO `user_role_relation` VALUES (10, 40, 4, NULL, NULL);
 INSERT INTO `user_role_relation` VALUES (11, 40, 5, NULL, NULL);
+INSERT INTO `user_role_relation` VALUES (12, 35, 1, NULL, NULL);
+INSERT INTO `user_role_relation` VALUES (13, 35, 2, NULL, NULL);
+INSERT INTO `user_role_relation` VALUES (14, 35, 3, NULL, NULL);
+INSERT INTO `user_role_relation` VALUES (15, 35, 4, NULL, NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;
