@@ -158,6 +158,16 @@ public class ExpenseAccountController {
         return CommonResult.failed();
     }
 
+    @ApiOperation(value = "确认收单")
+    @PostMapping("/deliver/{id}")
+    public CommonResult deliver(@PathVariable Long id){
+        boolean success = expenseAccountService.deliverExpenseAccount(id);
+        if (success) {
+            return CommonResult.success(null);
+        }
+        return CommonResult.failed();
+    }
+    
     @ApiOperation("打印单据")
     @GetMapping(value = "/print/{id}")
     public CommonResult<Account2Print> fetchAccount2print(@PathVariable Long id) {
