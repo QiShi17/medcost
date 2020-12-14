@@ -50,6 +50,7 @@ public class ExpenseAccountServiceImpl extends ServiceImpl<ExpenseAccountMapper,
 
     @Autowired
     UserMapper userMapper;
+    @Autowired
     ReviewerExpenseAccountRelationMapper reviewerExpenseAccountRelationMapper;
 
     @Override
@@ -83,7 +84,7 @@ public class ExpenseAccountServiceImpl extends ServiceImpl<ExpenseAccountMapper,
         }
     }
 
-
+    @Override
     public boolean agreeExpenseAccountById(Long expenseAccountId,String reviewerUsername) {
         System.out.println("名字是"+reviewerUsername);
         ExpenseAccount expenseAccount = getById(expenseAccountId);
