@@ -28,6 +28,8 @@ public interface ExpenseAccountService extends IService<ExpenseAccount> {
      */
     AccountDetail getAccountDetailByExpenseAccountId(Long expenseAccountId);
 
+    AccountDetail getInReviewAccountDetailByExpenseAccountId(Long expenseAccountId);
+
     /**
      * 确认收单
      * @param expenseAccountId

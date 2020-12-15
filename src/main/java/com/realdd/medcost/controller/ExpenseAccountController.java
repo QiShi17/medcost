@@ -127,8 +127,17 @@ public class ExpenseAccountController {
     @ApiOperation("获取详情页")
     @GetMapping(value = "/detail/{id}")
     public CommonResult<AccountDetail> fetchAccountDetail(@PathVariable Long id) {
-        System.out.println("进入");
+        System.out.println("进入1");
         AccountDetail accountDetail = expenseAccountService.getAccountDetailByExpenseAccountId((long) id);
+        System.out.println(accountDetail);
+        return CommonResult.success(accountDetail);
+    }
+
+    @ApiOperation("获取审核中详情页")
+    @GetMapping(value = "/in_review_detail/{id}")
+    public CommonResult<AccountDetail> fetchInReviewAccountDetail(@PathVariable Long id) {
+        System.out.println("进入2");
+        AccountDetail accountDetail = expenseAccountService.getInReviewAccountDetailByExpenseAccountId((long) id);
         System.out.println(accountDetail);
         return CommonResult.success(accountDetail);
     }

@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.realdd.medcost.mapper.DepartmentMapper">
+    <resultMap id="BaseResultMap" type="com.realdd.medcost.entity.Department">
+        <id column="id" property="id" />
+        <result column="is_delete" property="isDelete" />
+        <result column="name" property="name" />
+    </resultMap>
 
+    <select id="selectAllDepartmentAndSchool" resultType="String">
+        select department.name
+        from department
+        where department.is_delete=1
+    </select>
 </mapper>

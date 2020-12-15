@@ -51,7 +51,7 @@
 
     <insert id="add" parameterType="com.realdd.medcost.entity.ReviewerExpenseAccountRelation" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
         insert into reviewer_expense_account_relation(reviewer_id_num, expense_account_id, reviewer_master_id_num, comment, status, is_cancel, total, create_time, update_time)
-        values(#{reviewerIdNum},#{expenseAccountId},#{reviewerMasterIdNum},#{comment},#{status},#{isCancel},#{total},#{createTime},#{updateTime})
+        values (#{reviewerIdNum},#{expenseAccountId},#{reviewerMasterIdNum},#{comment},#{status},#{isCancel},#{total},#{createTime},#{updateTime})
     </insert>
 
     <select id="selectByExpenseAccountId" resultType="com.realdd.medcost.entity.ReviewerExpenseAccountRelation">

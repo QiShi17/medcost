@@ -26,6 +26,7 @@
         <result column="prescription_img" property="prescriptionImg" />
         <result column="invoice_time" property="invoiceTime" />
         <result column="invoice_fee" property="invoiceFee" />
+        <result column="invoice_img" property="invoiceImg" />
         <collection property="reviewRecordList" resultMap="reviewRecordList"/>
     </resultMap>
 
@@ -52,13 +53,17 @@
             u.department,
             u.major,
             h.name,
-            ea.referral_img,
             ea.l_hospital_name,
             ea.room,
-            ea.deadline,
             ea.prescription_img,
+            ea.referral_img,
+            ea.deadline,
+            ea.regist_img,
+            ea.regist_time,
+            ea.regist_fee,
             ea.invoice_time,
             ea.invoice_fee,
+            ea.invoice_img,
             rear.create_time,
             reviewer.realname,
             rear.reviewer_id_num,
@@ -74,5 +79,38 @@
               ea.username=u.username and
               ea.id=rear.expense_account_id and
               reviewer.username=rear.reviewer_id_num
+    </select>
+
+    <select id="getInReviewAccountDetailByExpenseAccountId" resultMap="BaseResultMap">
+        SELECT
+            ea.id as eaid,
+            ea.status as eastatus,
+            ea.serial_num,
+            ea.expense_type_id,
+            u.realname,
+            u.username,
+            u.gender,
+            u.age,
+            u.type,
+            u.department,
+            u.major,
+            h.name,
+            ea.l_hospital_name,
+            ea.room,
+            ea.prescription_img,
+            ea.referral_img,
+            ea.deadline,
+            ea.regist_img,
+            ea.regist_time,
+            ea.regist_fee,
+            ea.invoice_time,
+            ea.invoice_fee,
+            ea.invoice_img
+        FROM user u,
+             expense_account ea,
+             hospital h
+        where ea.id=#{expenseAccountId} and
+              h.id=ea.f_hospital_id and
+              ea.username=u.username
     </select>
 </mapper>

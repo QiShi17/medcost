@@ -91,6 +91,8 @@ public class AccountDetail implements Serializable {
     @ApiModelProperty(value = "发票费用")
     private Double invoiceFee;
 
+    private String invoiceImg;
+
     private List<ReviewRecord> reviewRecordList;
 
 }

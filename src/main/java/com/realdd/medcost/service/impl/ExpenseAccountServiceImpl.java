@@ -19,7 +19,9 @@ import com.realdd.medcost.mapper.ReviewerExpenseAccountRelationMapper;
 import com.realdd.medcost.mapper.RoleMapper;
 import com.realdd.medcost.service.ExpenseAccountService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.apache.ibatis.jdbc.Null;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.expression.spel.ast.NullLiteral;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
@@ -50,6 +52,8 @@ public class ExpenseAccountServiceImpl extends ServiceImpl<ExpenseAccountMapper,
 
     @Autowired
     UserMapper userMapper;
+
+    @Autowired
     ReviewerExpenseAccountRelationMapper reviewerExpenseAccountRelationMapper;
 
     @Override
@@ -62,6 +66,11 @@ public class ExpenseAccountServiceImpl extends ServiceImpl<ExpenseAccountMapper,
     @Override
     public AccountDetail getAccountDetailByExpenseAccountId(Long expenseAccountId) {
         return this.accountDetailMapper.getAccountDetailByExpenseAccountId(expenseAccountId);
+    }
+
+    @Override
+    public AccountDetail getInReviewAccountDetailByExpenseAccountId(Long expenseAccountId) {
+        return this.accountDetailMapper.getInReviewAccountDetailByExpenseAccountId(expenseAccountId);
     }
 
     @Override
@@ -83,19 +92,46 @@ public class ExpenseAccountServiceImpl extends ServiceImpl<ExpenseAccountMapper,
         }
     }
 
-
+    @Override
     public boolean agreeExpenseAccountById(Long expenseAccountId,String reviewerUsername) {
         System.out.println("名字是"+reviewerUsername);
         ExpenseAccount expenseAccount = getById(expenseAccountId);
+        System.out.println("单据是"+expenseAccount);
         ReviewerExpenseAccountRelation reviewerExpenseAccountRelation=new ReviewerExpenseAccountRelation();
         reviewerExpenseAccountRelation.setExpenseAccountId(expenseAccountId);
         reviewerExpenseAccountRelation.setCreateTime(new Date());
         reviewerExpenseAccountRelation.setUpdateTime(reviewerExpenseAccountRelation.getCreateTime());
         reviewerExpenseAccountRelation.setReviewerIdNum(reviewerUsername);
-        reviewerExpenseAccountRelation.setTotal(expenseAccount.getInvoiceFee()+expenseAccount.getRegistFee());
+        Integer expenseType=expenseAccount.getExpenseTypeId();
+        Double originalFee=expenseAccount.getInvoiceFee()+expenseAccount.getRegistFee();
+        Double total=0.0;
+        switch (expenseType)
+        {
+            case 1:
+            case 2:
+            case 5:
+                if(originalFee<=1300)
+                    total=originalFee*0.8;
+                else
+                    total=originalFee*0.9;
+                break;
+            case 3:
+                if(originalFee<=1300)
+                    total=originalFee*0.9;
+                else
+                    total=originalFee;
+                break;
+            case 4:
+                total=originalFee;
+                break;
+            default:
+                total=originalFee;
+        }
+        reviewerExpenseAccountRelation.setTotal(total);
         reviewerExpenseAccountRelation.setStatus(1);        //审核通过
         reviewerExpenseAccountRelation.setIsCancel(0);      //审核负责人没有取消申请通过的状态
         //不设置comment,因为直接审核通过，没有修改意见
+        System.out.println("relation是"+reviewerExpenseAccountRelation);
         if(expenseAccount.getStatus()==2)
         {
             expenseAccount.setStatus(3);

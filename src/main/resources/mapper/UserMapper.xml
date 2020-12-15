@@ -35,5 +35,9 @@ values
  (#{item.username},#{item.realname},#{item.password},#{item.gender},#{item.age},#{item.type},#{item.school},#{item.major},#{item.grade},#{item.department},#{item.updateTime},#{item.loginTime},#{item.createTime})</foreach>ON DUPLICATE KEY UPDATE realname=values(realname),password=values(password),gender=values(gender),age=values(age),type=values(type),school=values(school),major=values(major),grade=values(grade),department=values(department),update_time=values(update_time),login_time=values(login_time),create_time=values(create_time)
 </insert>
 
+    <select id="selectAll" resultType="com.realdd.medcost.entity.User">
+        select u.*
+        from user u
+    </select>
 
 </mapper>
