@@ -20,6 +20,7 @@
         <result column="room" property="room" />
         <result column="deadline" property="deadline" />
         <result column="regist_time" property="registTime" />
+        <result column="school" property="school" />
         <result column="regist_fee" property="registFee" />
         <result column="regist_img" property="registImg" />
         <result column="disease" property="disease" />
@@ -32,7 +33,7 @@
 
     <resultMap id="reviewRecordList" type="com.realdd.medcost.dto.ReviewRecord">
         <id column="id" property="id" jdbcType="BIGINT"/>
-        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
         <result column="realname" property="reviewerRealname" />
         <result column="reviewer_id_num" property="reviewerIdNum" />
         <result column="rearstatus" property="status" />
@@ -52,6 +53,7 @@
             u.type,
             u.department,
             u.major,
+            u.school,
             h.name,
             ea.l_hospital_name,
             ea.room,
@@ -64,7 +66,7 @@
             ea.invoice_time,
             ea.invoice_fee,
             ea.invoice_img,
-            rear.create_time,
+            rear.update_time,
             reviewer.realname,
             rear.reviewer_id_num,
             rear.status as rearstatus,
@@ -94,6 +96,7 @@
             u.type,
             u.department,
             u.major,
+            u.school,
             h.name,
             ea.l_hospital_name,
             ea.room,

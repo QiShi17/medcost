@@ -21,7 +21,7 @@ public class ReviewRecord {
     private Long id;
 
     @ApiModelProperty(value = "创建时间")
-    private LocalDateTime createTime;
+    private LocalDateTime updateTime;
 
     @ApiModelProperty(value = "审核人姓名")
     private String reviewerRealname;

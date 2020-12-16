@@ -54,6 +54,9 @@ public class AccountDetail implements Serializable {
     @ApiModelProperty(value = "部门")
     private String department;
 
+    @ApiModelProperty(value = "学院")
+    private String school;
+
     @ApiModelProperty(value = "专业")
     private String major;
 
