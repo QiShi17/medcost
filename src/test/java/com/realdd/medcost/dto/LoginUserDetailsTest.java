@@ -21,7 +21,7 @@ class LoginUserDetailsTest {
     RoleService roleService;
     @Test
     void getAuthorities(){
-        User user=userService.getUserByUsername("2020212029");
+        User user=userService.getUserByUsername("xwz");
         List<Role> roles= roleService.getRoleListByUserId(user.getId());
         LoginUserDetails loginUserDetails=new LoginUserDetails(user,roles);
         Collection<? extends GrantedAuthority> authorities=loginUserDetails.getAuthorities();
